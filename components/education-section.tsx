@@ -9,12 +9,14 @@ const education = [
     degree: "Master 2: MIAGE",
     distinction: "Ranked 1st in class",
     school: "Universite Paris-Saclay, Paris",
+    logo: "/images/logos/paris-saclay.jpg",
     period: "2023 - 2025",
   },
   {
     degree: "State Engineer in Information Systems",
     distinction: "",
     school: "Ecole Nationale Superieure d'Informatique (ESI), Algiers",
+    logo: "/images/logos/esi.jpg",
     period: "2018 - 2023",
   },
 ]
@@ -66,14 +68,26 @@ export function EducationSection() {
             {education.map((edu, i) => (
               <div
                 key={edu.degree}
-                className={`rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${eduGridVisible ? "is-visible" : ""}`}
+                className={`flex gap-4 rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${eduGridVisible ? "is-visible" : ""}`}
               >
-                <h3 className="text-lg font-semibold text-card-foreground">{edu.degree}</h3>
-                {edu.distinction && (
-                  <p className="mt-1 text-sm font-medium text-primary">{edu.distinction}</p>
-                )}
-                <p className="mt-2 text-sm text-muted-foreground">{edu.school}</p>
-                <p className="mt-1 font-mono text-xs tracking-wider text-muted-foreground">{edu.period}</p>
+                {/* School logo */}
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-foreground/90">
+                  <Image
+                    src={edu.logo}
+                    alt={`${edu.school} logo`}
+                    fill
+                    className="object-contain p-1"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <h3 className="text-lg font-semibold text-card-foreground">{edu.degree}</h3>
+                  {edu.distinction && (
+                    <p className="mt-0.5 text-sm font-medium text-primary">{edu.distinction}</p>
+                  )}
+                  <p className="mt-1.5 text-sm text-muted-foreground">{edu.school}</p>
+                  <p className="mt-1 font-mono text-xs tracking-wider text-muted-foreground">{edu.period}</p>
+                </div>
               </div>
             ))}
           </div>

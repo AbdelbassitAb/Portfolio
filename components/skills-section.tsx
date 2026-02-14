@@ -22,11 +22,69 @@ const skillCategories = [
 ]
 
 const languages = [
-  { name: "French", level: "Fluent" },
-  { name: "English", level: "Professional" },
-  { name: "Arabic", level: "Native" },
-  { name: "Spanish", level: "Basic" },
+  { name: "French", level: "Fluent", flag: "FR" },
+  { name: "English", level: "Professional", flag: "GB" },
+  { name: "Arabic", level: "Native", flag: "DZ" },
+  { name: "Spanish", level: "Basic", flag: "ES" },
 ]
+
+function FlagIcon({ code }: { code: string }) {
+  const flags: Record<string, { colors: string[]; layout: "tricolor-v" | "tricolor-h" | "bicolor" | "crescent" }> = {
+    FR: { colors: ["#002395", "#FFFFFF", "#ED2939"], layout: "tricolor-v" },
+    GB: { colors: ["#012169", "#C8102E", "#FFFFFF"], layout: "bicolor" },
+    DZ: { colors: ["#006233", "#FFFFFF", "#D21034"], layout: "tricolor-v" },
+    ES: { colors: ["#AA151B", "#F1BF00", "#AA151B"], layout: "tricolor-h" },
+  }
+
+  const flag = flags[code]
+  if (!flag) return null
+
+  if (code === "FR") {
+    return (
+      <svg viewBox="0 0 30 20" className="h-5 w-7 rounded-[2px] shadow-sm" aria-hidden="true">
+        <rect width="10" height="20" fill="#002395" />
+        <rect x="10" width="10" height="20" fill="#FFFFFF" />
+        <rect x="20" width="10" height="20" fill="#ED2939" />
+      </svg>
+    )
+  }
+
+  if (code === "GB") {
+    return (
+      <svg viewBox="0 0 60 30" className="h-5 w-7 rounded-[2px] shadow-sm" aria-hidden="true">
+        <rect width="60" height="30" fill="#012169" />
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFFFFF" strokeWidth="6" />
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" />
+        <path d="M30,0 V30 M0,15 H60" stroke="#FFFFFF" strokeWidth="10" />
+        <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" strokeWidth="6" />
+      </svg>
+    )
+  }
+
+  if (code === "DZ") {
+    return (
+      <svg viewBox="0 0 30 20" className="h-5 w-7 rounded-[2px] shadow-sm" aria-hidden="true">
+        <rect width="15" height="20" fill="#006233" />
+        <rect x="15" width="15" height="20" fill="#FFFFFF" />
+        <circle cx="16" cy="10" r="5" fill="#D21034" />
+        <circle cx="17.5" cy="10" r="4" fill="#FFFFFF" />
+        <polygon points="17,6.5 17.8,9 20.5,9 18.3,10.8 19,13.5 17,11.7 15,13.5 15.7,10.8 13.5,9 16.2,9" fill="#D21034" />
+      </svg>
+    )
+  }
+
+  if (code === "ES") {
+    return (
+      <svg viewBox="0 0 30 20" className="h-5 w-7 rounded-[2px] shadow-sm" aria-hidden="true">
+        <rect width="30" height="5" fill="#AA151B" />
+        <rect y="5" width="30" height="10" fill="#F1BF00" />
+        <rect y="15" width="30" height="5" fill="#AA151B" />
+      </svg>
+    )
+  }
+
+  return null
+}
 
 export function SkillsSection() {
   const { ref: headerRef, isVisible: headerVisible } = useAnimateOnScroll(0.1)
@@ -77,10 +135,13 @@ export function SkillsSection() {
             {languages.map((lang, i) => (
               <div
                 key={lang.name}
-                className={`rounded-xl border border-border bg-card p-4 text-center transition-all hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${langVisible ? "is-visible" : ""}`}
+                className={`flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${langVisible ? "is-visible" : ""}`}
               >
-                <p className="font-medium text-card-foreground">{lang.name}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{lang.level}</p>
+                <FlagIcon code={lang.flag} />
+                <div>
+                  <p className="font-medium text-card-foreground">{lang.name}</p>
+                  <p className="text-xs text-muted-foreground">{lang.level}</p>
+                </div>
               </div>
             ))}
           </div>

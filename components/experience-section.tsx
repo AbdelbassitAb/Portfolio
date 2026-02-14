@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Briefcase } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 
@@ -7,6 +8,7 @@ const experiences = [
   {
     title: "Business / Data Analyst",
     company: "Dassault Systemes",
+    logo: "/images/logos/dassault-systemes.png",
     department: "Global Sales Operations",
     period: "Oct 2025 - Present",
     tasks: [
@@ -21,6 +23,7 @@ const experiences = [
   {
     title: "Data Analyst",
     company: "Dassault Systemes",
+    logo: "/images/logos/dassault-systemes.png",
     department: "Procurement Excellence",
     period: "Sept 2024 - Sept 2025",
     tasks: [
@@ -35,6 +38,7 @@ const experiences = [
   {
     title: "Data Analyst",
     company: "Ministry of Fisheries of Algeria",
+    logo: "/images/logos/ministere-peche.webp",
     department: "",
     period: "Sept 2022 - Jul 2023",
     tasks: [
@@ -60,18 +64,27 @@ function ExperienceItem({ exp, index }: { exp: typeof experiences[number]; index
       <div className="absolute left-0 top-2 hidden h-[15px] w-[15px] rounded-full border-2 border-primary bg-background md:block" />
 
       <div className="flex flex-col gap-1">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          {/* Company logo */}
+          <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-md bg-foreground/90">
+            <Image
+              src={exp.logo}
+              alt={`${exp.company} logo`}
+              fill
+              className="object-contain p-0.5"
+            />
+          </div>
           <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
           <span className="text-primary">{"·"}</span>
           <span className="font-medium text-primary">{exp.company}</span>
         </div>
         {exp.department && (
-          <p className="text-sm text-muted-foreground">{exp.department}</p>
+          <p className="text-sm text-muted-foreground md:pl-11">{exp.department}</p>
         )}
-        <p className="font-mono text-xs tracking-wider text-muted-foreground">{exp.period}</p>
+        <p className="font-mono text-xs tracking-wider text-muted-foreground md:pl-11">{exp.period}</p>
       </div>
 
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-2 md:pl-11">
         {exp.tasks.map((task, j) => (
           <li key={j} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/50" />
@@ -80,7 +93,7 @@ function ExperienceItem({ exp, index }: { exp: typeof experiences[number]; index
         ))}
       </ul>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 md:pl-11">
         {exp.skills.map((skill) => (
           <span
             key={skill}
