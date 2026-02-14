@@ -1,4 +1,7 @@
-import { Briefcase, ExternalLink } from "lucide-react"
+"use client"
+
+import { Briefcase } from "lucide-react"
+import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 
 const experiences = [
   {
@@ -45,11 +48,62 @@ const experiences = [
   },
 ]
 
+function ExperienceItem({ exp, index }: { exp: typeof experiences[number]; index: number }) {
+  const { ref, isVisible } = useAnimateOnScroll(0.1)
+
+  return (
+    <div
+      ref={ref}
+      className={`relative flex flex-col gap-4 md:pl-10 animate-fade-up stagger-${index + 1} ${isVisible ? "is-visible" : ""}`}
+    >
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-2 hidden h-[15px] w-[15px] rounded-full border-2 border-primary bg-background md:block" />
+
+      <div className="flex flex-col gap-1">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+          <span className="text-primary">{"·"}</span>
+          <span className="font-medium text-primary">{exp.company}</span>
+        </div>
+        {exp.department && (
+          <p className="text-sm text-muted-foreground">{exp.department}</p>
+        )}
+        <p className="font-mono text-xs tracking-wider text-muted-foreground">{exp.period}</p>
+      </div>
+
+      <ul className="flex flex-col gap-2">
+        {exp.tasks.map((task, j) => (
+          <li key={j} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/50" />
+            {task}
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex flex-wrap gap-2">
+        {exp.skills.map((skill) => (
+          <span
+            key={skill}
+            className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function ExperienceSection() {
+  const { ref: headerRef, isVisible: headerVisible } = useAnimateOnScroll(0.1)
+
   return (
     <section id="experience" className="px-6 py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex items-center gap-3">
+        <div
+          ref={headerRef}
+          className={`mb-12 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
+        >
           <Briefcase className="h-5 w-5 text-primary" />
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Experience</h2>
         </div>
@@ -60,42 +114,7 @@ export function ExperienceSection() {
 
           <div className="flex flex-col gap-12">
             {experiences.map((exp, i) => (
-              <div key={i} className="relative flex flex-col gap-4 md:pl-10">
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-2 hidden h-[15px] w-[15px] rounded-full border-2 border-primary bg-background md:block" />
-
-                <div className="flex flex-col gap-1">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
-                    <span className="text-primary">{"·"}</span>
-                    <span className="font-medium text-primary">{exp.company}</span>
-                  </div>
-                  {exp.department && (
-                    <p className="text-sm text-muted-foreground">{exp.department}</p>
-                  )}
-                  <p className="font-mono text-xs tracking-wider text-muted-foreground">{exp.period}</p>
-                </div>
-
-                <ul className="flex flex-col gap-2">
-                  {exp.tasks.map((task, j) => (
-                    <li key={j} className="flex gap-3 text-sm leading-relaxed text-muted-foreground">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/50" />
-                      {task}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <ExperienceItem key={i} exp={exp} index={i} />
             ))}
           </div>
         </div>
