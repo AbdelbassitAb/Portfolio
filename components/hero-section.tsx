@@ -53,7 +53,7 @@ export function HeroSection() {
           <div className={`flex flex-wrap items-center gap-3 animate-fade-up stagger-4 ${isVisible ? "is-visible" : ""}`}>
             <a
               href="/cv.pdf"
-              download
+              download="Abdelbassit-Abed-Meraim-CV.pdf"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 glow-primary-hover"
             >
               <Download className="h-4 w-4" />
