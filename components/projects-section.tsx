@@ -78,6 +78,36 @@ const projects: Project[] = [
       "Attrition is concentrated in specific departments and roles, suggesting structural team-level issues",
     ],
   },
+  {
+    title: "Food & Beverage - Marketing Analytics Platform",
+    shortDescription:
+      "End-to-end marketing analytics project combining Snowflake pipelines, Streamlit dashboards, and machine learning to support smarter decisions under tight budget constraints.",
+    fullDescription:
+      "This project was built for a fictional food and beverage company facing lower sales, a 30% reduction in marketing budget, and a loss of market share. The solution covers the full analytics workflow: ingesting raw CSV, TSV, and JSON data into Snowflake, cleaning and standardizing data through bronze and silver layers, creating stable analytics tables for reuse, and exposing the resulting data product for BI, Streamlit dashboards, and machine learning use cases. The focus is on turning scattered operational data into a reliable analytics foundation for campaign optimization and business decision-making.",
+    thumbnail: "/images/projects/food-beverage/Overview.png",
+    images: [
+      { src: "/images/projects/food-beverage/Overview.png", label: "Overview" },
+      { src: "/images/projects/food-beverage/Sales.png", label: "Sales Analysis" },
+      { src: "/images/projects/food-beverage/Promotion.png", label: "Promotion Analysis" },
+    ],
+    skills: [
+      "Snowflake",
+      "Streamlit",
+      "Machine Learning",
+      "SQL",
+      "Analytics Engineering",
+      "Data Cleaning",
+    ],
+    github: "https://github.com/AbdelbassitAb/FOOD-BEVERAGE",
+    highlights: [
+      "Built a 3-layer architecture across bronze, silver, and analytics schemas for dependable downstream analysis",
+      "Loaded mixed-format source data from CSV, TSV, JSON, and S3 into Snowflake with fit-for-purpose ingestion rules",
+      "Applied text cleanup, type harmonization, deduplication, and business validation before analytics consumption",
+      "Converted exploratory analysis into reusable analytics tables designed for dashboards, advanced analysis, and ML",
+      "Framed the project around marketing optimization during a 30% budget cut and declining market share",
+      "Delivered a data product approach focused on reporting, campaign optimization, and future predictive modeling",
+    ],
+  },
 ]
 
 function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
