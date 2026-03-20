@@ -47,6 +47,37 @@ const projects: Project[] = [
       "International calls feature: customers with active international plans but no calls show 71.19% churn",
     ],
   },
+  {
+    title: "HR Analytics — Employee Attrition Dashboard",
+    shortDescription:
+      "Interactive Power BI dashboard built on Atlas Labs HR data (1,470 employees) to track attrition drivers across tenure, overtime, travel, satisfaction, and department exposure.",
+    fullDescription:
+      "This HR Analytics project focuses on employee attrition analysis to support data-driven retention decisions. The dashboard combines workforce KPIs, demographics, performance and satisfaction tracking, and detailed attrition diagnostics in one navigable report. Built with a star-schema model and dedicated DAX measures table, it highlights risk patterns across early tenure, overtime, frequent travel, and role-level exposure while keeping calculations consistent and maintainable.",
+    thumbnail: "/images/projects/hr-attrition/overview.png",
+    images: [
+      { src: "/images/projects/hr-attrition/overview.png", label: "Overview" },
+      { src: "/images/projects/hr-attrition/demographics.png", label: "Demographics" },
+      { src: "/images/projects/hr-attrition/performance-tracker.png", label: "Performance Tracker" },
+      { src: "/images/projects/hr-attrition/attrition.png", label: "Attrition Analysis" },
+    ],
+    skills: [
+      "Power BI",
+      "DAX",
+      "Power Query",
+      "Data Modeling",
+      "HR Analytics",
+      "Business Intelligence",
+    ],
+    github: "https://github.com/AbdelbassitAb/HR-analytics---power-bi",
+    highlights: [
+      "Overall workforce snapshot: 1,470 employees with ~16.1% attrition (~237 leavers)",
+      "Highest attrition appears in early tenure windows, especially the first 1–2 years",
+      "Overtime employees show materially higher attrition, acting as a leading risk signal",
+      "Frequent business travel correlates with increased turnover compared with non-travel employees",
+      "Lower satisfaction scores often precede exits, supporting proactive retention monitoring",
+      "Attrition is concentrated in specific departments and roles, suggesting structural team-level issues",
+    ],
+  },
 ]
 
 function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
