@@ -81,7 +81,7 @@ const projects: Project[] = [
 ]
 
 function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
-  const { ref, isVisible } = useAnimateOnScroll(0.1)
+  const { ref, isVisible } = useAnimateOnScroll<HTMLButtonElement>(0.1)
 
   return (
     <button

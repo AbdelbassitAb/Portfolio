@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from 'next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
+const GOOGLE_ANALYTICS_ID = 'G-V62W9ZCE6L'
 
 export const metadata: Metadata = {
   title: 'Abdelbassit Abed Meraim - Data Analyst',
@@ -42,6 +44,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${_inter.variable} ${_jetbrainsMono.variable} font-sans antialiased`}>
         {children}
+        <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
         <Analytics />
       </body>
     </html>
