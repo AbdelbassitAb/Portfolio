@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Download, Linkedin, Github, Mail, MapPin } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { trackCTA, trackEvent, trackContactIntentAction } from "@/lib/analytics"
 
 export function HeroSection() {
   const { ref, isVisible } = useAnimateOnScroll(0.1)
@@ -54,6 +55,11 @@ export function HeroSection() {
             <a
               href="/cv.pdf"
               download="Abdelbassit-Abed-Meraim-CV.pdf"
+              onClick={() => {
+                trackCTA("download_cv", "hero")
+                trackEvent("cv_download")
+                trackContactIntentAction("cv_download")
+              }}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 glow-primary-hover"
             >
               <Download className="h-4 w-4" />
@@ -63,6 +69,7 @@ export function HeroSection() {
               href="https://www.linkedin.com/in/abdelbassit-abed-meraim-909b54174/"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackCTA("linkedin", "hero")}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm font-medium text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary"
               aria-label="LinkedIn profile"
             >
@@ -73,6 +80,7 @@ export function HeroSection() {
               href="https://github.com/AbdelbassitAb"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackCTA("github", "hero")}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm font-medium text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary"
               aria-label="GitHub profile"
             >
@@ -81,6 +89,7 @@ export function HeroSection() {
             </a>
             <a
               href="mailto:ia_abedmeraim@esi.dz"
+              onClick={() => trackCTA("email", "hero")}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm font-medium text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary"
               aria-label="Send email"
             >

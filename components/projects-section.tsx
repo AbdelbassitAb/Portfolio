@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { FolderOpen, Github, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { trackProject, trackProjectImpression, trackContactIntentAction } from "@/lib/analytics"
 
 interface Project {
   title: string
@@ -110,12 +111,22 @@ const projects: Project[] = [
   },
 ]
 
-function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
+function ProjectCard({
+  project,
+  projectPosition,
+  onClick,
+}: {
+  project: Project
+  projectPosition: number
+  onClick: () => void
+}) {
   const { ref, isVisible } = useAnimateOnScroll<HTMLButtonElement>(0.1)
 
   return (
     <button
       ref={ref}
+      data-project-name={project.title}
+      data-project-position={projectPosition}
       onClick={onClick}
       className={`group w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-card text-left transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 animate-scale-in ${isVisible ? "is-visible" : ""}`}
     >
@@ -190,6 +201,11 @@ function ProjectModal({
       window.removeEventListener("keydown", handleKeyDown)
     }
   }, [onClose, goNext, goPrev])
+
+  useEffect(() => {
+    // Fires once whenever a project modal is opened.
+    trackProject("open_modal", project.title)
+  }, [project.title])
 
   return (
     <div
@@ -325,6 +341,10 @@ function ProjectModal({
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackProject("github_click", project.title)
+                trackContactIntentAction("github")
+              }}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 glow-primary-hover"
             >
               <Github className="h-4 w-4" />
@@ -342,6 +362,34 @@ export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const { ref: headerRef, isVisible: headerVisible } = useAnimateOnScroll(0.1)
 
+  useEffect(() => {
+    const seenProjects = new Set<string>()
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          const projectName = entry.target.getAttribute("data-project-name")
+          const projectPosition = Number(entry.target.getAttribute("data-project-position"))
+          if (!projectName || seenProjects.has(projectName)) return
+
+          seenProjects.add(projectName)
+          trackProjectImpression(projectName, projectPosition)
+          observer.unobserve(entry.target)
+        })
+      },
+      { threshold: 0.45 }
+    )
+
+    const projectCards = document.querySelectorAll<HTMLButtonElement>("[data-project-name]")
+    projectCards.forEach((projectCard) => {
+      const projectName = projectCard.getAttribute("data-project-name")
+      if (!projectName || seenProjects.has(projectName)) return
+      observer.observe(projectCard)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="projects" className="px-6 py-20">
       <div className="mx-auto max-w-6xl">
@@ -354,11 +402,15 @@ export function ProjectsSection() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <ProjectCard
               key={project.title}
               project={project}
-              onClick={() => setSelectedProject(project)}
+              projectPosition={index + 1}
+              onClick={() => {
+                trackProject("card_click", project.title)
+                setSelectedProject(project)
+              }}
             />
           ))}
         </div>
