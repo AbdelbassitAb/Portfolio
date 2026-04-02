@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
+import { trackNavigation } from "@/lib/analytics"
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -22,6 +23,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const handleNavigationClick = (sectionName: string) => {
+    trackNavigation(sectionName.toLowerCase())
+  }
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -41,6 +46,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
+                onClick={() => handleNavigationClick(link.label)}
                 className="relative text-sm text-muted-foreground transition-colors hover:text-foreground after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
@@ -67,7 +73,10 @@ export function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    handleNavigationClick(link.label)
+                    setMobileOpen(false)
+                  }}
                   className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary"
                 >
                   {link.label}

@@ -5,10 +5,12 @@ import { SkillsSection } from "@/components/skills-section"
 import { EducationSection } from "@/components/education-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { Footer } from "@/components/footer"
+import { EngagementTracker } from "@/components/engagement-tracker"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <EngagementTracker />
       <Navbar />
       <main>
         <HeroSection />

@@ -2,6 +2,7 @@
 
 import { Linkedin, Github, Mail, Phone } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { trackCTA } from "@/lib/analytics"
 
 export function Footer() {
   const { ref, isVisible } = useAnimateOnScroll(0.1)
@@ -19,6 +20,7 @@ export function Footer() {
         <div className={`flex flex-wrap items-center justify-center gap-4 animate-fade-up stagger-2 ${isVisible ? "is-visible" : ""}`}>
           <a
             href="mailto:ia_abedmeraim@esi.dz"
+            onClick={() => trackCTA("email", "footer")}
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-md hover:shadow-primary/5"
           >
             <Mail className="h-4 w-4" />
@@ -26,6 +28,7 @@ export function Footer() {
           </a>
           <a
             href="tel:+33605591453"
+            onClick={() => trackCTA("phone", "footer")}
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-md hover:shadow-primary/5"
           >
             <Phone className="h-4 w-4" />
@@ -35,6 +38,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/abdelbassit-abed-meraim-909b54174/"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackCTA("linkedin", "footer")}
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-md hover:shadow-primary/5"
           >
             <Linkedin className="h-4 w-4" />
@@ -44,6 +48,7 @@ export function Footer() {
             href="https://github.com/AbdelbassitAb"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackCTA("github", "footer")}
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-md hover:shadow-primary/5"
           >
             <Github className="h-4 w-4" />
