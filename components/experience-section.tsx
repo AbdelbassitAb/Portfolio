@@ -12,11 +12,11 @@ const experiences = [
     department: "Global Sales Operations",
     period: "Oct 2025 - Present",
     tasks: [
-      "Resolved inconsistent KPI definitions across 11 GEOs by redesigning harmonization rules with Sales stakeholders, improving trust in executive-level performance reporting.",
-      "Identified recurring ARR and pipeline discrepancies between Global Sales Operations and Finance data marts through comparative Business Objects analysis, enabling faster root-cause investigation and remediation.",
-      "Converted ambiguous business requirements into structured functional and technical specifications, reducing delivery friction between Sales and IT during BI migration cycles.",
-      "Led cross-functional alignment between Sales and IT during dashboard migration to Data Perspectives, protecting reporting continuity for strategic decision-makers.",
-      "Migrated and strengthened 3 strategic sales dashboards with improved data controls, increasing KPI reliability for recurring business reviews.",
+      "Harmonization of Sales KPIs across 11 geographic zones (GEO), strengthening international reporting reliability.",
+      "Comparative analysis of Business Objects data (Global Sales Operations vs Finance) to identify discrepancies, investigate divergences, and determine root causes.",
+      "Translation of business needs into structured functional and technical data specifications.",
+      "Interface between Sales and IT teams during a BI migration project.",
+      "Migration and reliability improvement of 3 strategic dashboards to Data Perspectives.",
     ],
     skills: ["Business Objects", "Data Perspectives", "SQL", "KPI Design"],
   },
@@ -27,11 +27,11 @@ const experiences = [
     department: "Procurement Excellence",
     period: "Sept 2024 - Sept 2025",
     tasks: [
-      "Addressed fragmented procurement visibility by designing interactive dashboards in Data Perspectives, giving category leaders and buyers clearer performance tracking.",
-      "Standardized quarterly procurement reporting for 60 buyers worldwide by restructuring collection, cleaning, and transformation flows in Power Query.",
-      "Improved cross-source analysis reliability by writing optimized SQL queries for extraction and aggregation, accelerating recurring procurement insights generation.",
-      "Automated Excel-based validation and consolidation with Python across multi-region procurement files, reducing processing time from 2 days to minutes and lowering manual errors.",
-      "Built an AI-assisted compliance control script for procurement transactions, strengthening policy adherence checks at scale.",
+      "Creation of interactive dashboards with Data Perspectives (internal BI tool) to support procurement strategy.",
+      "Management of procurement data flows: collection, cleaning, and analysis via Power Query, with quarterly reporting for 60 buyers worldwide.",
+      "Writing and optimizing SQL queries to extract, aggregate, and analyze procurement data from multiple sources.",
+      "Development of Python scripts to automate Excel data processing (cleaning, transformation, validation), reducing processing time from 2 days to minutes.",
+      "Design of a Python script integrating an LLM to automatically control procurement transaction compliance with internal policies.",
     ],
     skills: ["Power Query", "SQL", "Python", "Power BI", "LLM"],
   },
@@ -42,11 +42,11 @@ const experiences = [
     department: "",
     period: "Sept 2022 - Jul 2023",
     tasks: [
-      "Solved unclear reporting needs by collecting and formalizing business requirements into actionable functional specifications for analytics delivery.",
-      "Applied statistical analysis and sampling methods to uncover operational signals, supporting more evidence-based planning and resource decisions.",
-      "Migrated legacy datasets into a PostgreSQL-centered architecture with transformation controls, improving long-term data accessibility and consistency.",
-      "Designed KPI frameworks and Power BI monitoring dashboards to provide near real-time visibility on priority operational indicators.",
-      "Improved project execution quality by embedding data quality, security practices, and Agile collaboration throughout delivery cycles.",
+      "Collection and analysis of business requirements, with drafting of functional specifications.",
+      "Data analysis (statistics, sampling) to support operational and strategic decision-making.",
+      "Collection, transformation, and migration of data to a PostgreSQL-based system with modern data architecture.",
+      "Design of KPIs and Power BI dashboards for real-time monitoring.",
+      "Contribution to data quality, security, and project delivery using Agile (Scrum) methodology.",
     ],
     skills: ["PostgreSQL", "Power BI", "Agile/Scrum", "Statistics"],
   },
@@ -60,10 +60,12 @@ function ExperienceItem({ exp, index }: { exp: typeof experiences[number]; index
       ref={ref}
       className={`relative flex flex-col gap-4 md:pl-10 animate-fade-up stagger-${index + 1} ${isVisible ? "is-visible" : ""}`}
     >
-      <div className="absolute top-2 left-0 hidden h-[15px] w-[15px] rounded-full border-2 border-primary bg-background md:block" />
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-2 hidden h-[15px] w-[15px] rounded-full border-2 border-primary bg-background md:block" />
 
       <div className="flex flex-col gap-1">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          {/* Company logo */}
           <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-md bg-foreground/90">
             <Image
               src={exp.logo}
@@ -113,17 +115,14 @@ export function ExperienceSection() {
       <div className="mx-auto max-w-6xl">
         <div
           ref={headerRef}
-          className={`mb-4 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
+          className={`mb-12 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
         >
           <Briefcase className="h-5 w-5 text-primary" />
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Experience</h2>
         </div>
-        <p className="mb-12 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Each role below reflects a consistent approach: diagnose business pain points, build reliable data solutions,
-          and translate analysis into measurable operational impact.
-        </p>
 
         <div className="relative">
+          {/* Timeline line */}
           <div className="absolute left-0 top-2 hidden h-full w-px bg-border md:left-[7px] md:block" />
 
           <div className="flex flex-col gap-12">
