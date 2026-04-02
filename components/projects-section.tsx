@@ -2,28 +2,78 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { FolderOpen, Github, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react"
+import { FolderOpen, Github, ExternalLink, ChevronLeft, ChevronRight, X, Star } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 import { trackProject, trackProjectImpression, trackContactIntentAction } from "@/lib/analytics"
+
+interface ProjectSection {
+  label: "Problem" | "Data" | "Analysis" | "Insights" | "Business impact"
+  content: string
+}
 
 interface Project {
   title: string
   shortDescription: string
-  fullDescription: string
   thumbnail: string
   images: { src: string; label: string }[]
   skills: string[]
   github: string
-  highlights: string[]
+  impact: string[]
+  sections: ProjectSection[]
+  featured?: boolean
 }
 
 const projects: Project[] = [
   {
-    title: "Customer Churn Analysis -- Power BI Dashboard",
+    title: "Enterprise Data Quality & Automation Pipeline",
     shortDescription:
-      "Interactive Power BI dashboard analyzing customer churn across 6,687 customers with a 26.86% churn rate, uncovering key drivers like contract type, demographics, and service patterns.",
-    fullDescription:
-      "This project analyzes customer churn behavior using the Databel dataset. The objective is to identify the main drivers of churn and provide actionable business insights. The report covers 6,687 total customers with 1,796 churned (26.86% churn rate). The dashboard includes 10 interactive report pages analyzing contract types, demographics, service usage, charges, geographic patterns, and customer behavior. Each page is designed with interactive filters and drill-downs for stakeholder exploration.",
+      "Featured project inspired by real enterprise operations: built a Python-based validation and standardization pipeline to make multi-region Excel data trustworthy and scalable.",
+    thumbnail: "/images/projects/food-beverage/Overview.png",
+    images: [
+      { src: "/images/projects/food-beverage/Overview.png", label: "Pipeline Overview" },
+      { src: "/images/projects/food-beverage/Sales.png", label: "Validation Outputs" },
+      { src: "/images/projects/food-beverage/Promotion.png", label: "Standardized Reporting" },
+    ],
+    skills: ["Python", "SQL", "Data Quality", "Data Governance", "Automation", "Power BI"],
+    github: "https://github.com/AbdelbassitAb/FOOD-BEVERAGE",
+    featured: true,
+    impact: [
+      "Reduced cross-region processing cycles from manual multi-day work to automated execution in minutes.",
+      "Improved reliability through rule-based validation checks for duplicates, missing fields, and schema mismatches.",
+      "Created a repeatable pipeline foundation that scales across teams and supports trustworthy KPI reporting.",
+    ],
+    sections: [
+      {
+        label: "Problem",
+        content:
+          "Regional teams were sharing inconsistent Excel files with different naming conventions, formats, and quality levels, creating reporting delays and KPI disputes.",
+      },
+      {
+        label: "Data",
+        content:
+          "Multi-source procurement and performance data from several regions, mainly spreadsheet-based inputs with inconsistent schemas and partial records.",
+      },
+      {
+        label: "Analysis",
+        content:
+          "Designed validation rules (completeness, uniqueness, format consistency), automated cleaning and standardization in Python, then consolidated into a reporting-ready model.",
+      },
+      {
+        label: "Insights",
+        content:
+          "Most delays were caused by recurring quality issues at ingestion stage; introducing pre-report controls eliminated repeated manual back-and-forth corrections.",
+      },
+      {
+        label: "Business impact",
+        content:
+          "Delivered faster and more reliable reporting cycles, reduced manual effort, and established scalable governance logic for future analytics use cases.",
+      },
+    ],
+  },
+  {
+    title: "Reducing Customer Churn – Power BI Analysis",
+    shortDescription:
+      "Interactive churn analysis on 6,687 customers uncovering high-risk patterns across contracts, demographics, and service usage to support retention strategy.",
     thumbnail: "/images/projects/churn/overview.png",
     images: [
       { src: "/images/projects/churn/overview.png", label: "Overview" },
@@ -39,21 +89,42 @@ const projects: Project[] = [
     ],
     skills: ["Power BI", "DAX", "Data Analysis", "Data Visualization", "KPI Design", "Business Intelligence"],
     github: "https://github.com/AbdelbassitAb/Analyzing-customer-churn---Power-BI",
-    highlights: [
-      "Monthly contracts show 46.29% churn rate vs 6.62% for yearly contracts",
-      "New customers (short account length) show churn above 40-50%, dropping below 10% for long-term customers",
-      "Customers on unlimited data plans with lower actual consumption show higher churn rates",
-      "Seniors (over 65) show significantly higher churn rates compared to other age groups",
-      "Top churn reasons: competitor offers (44.82%), attitude of support (15.98%), and dissatisfaction (15.92%)",
-      "International calls feature: customers with active international plans but no calls show 71.19% churn",
+    impact: [
+      "Identified a major contract risk gap: monthly plans at 46.29% churn vs yearly plans at 6.62%.",
+      "Exposed early-lifecycle churn concentration above 40% among new customers, enabling targeted onboarding interventions.",
+      "Mapped top churn reasons to concrete retention levers (competitor offers, support experience, pricing transparency).",
+    ],
+    sections: [
+      {
+        label: "Problem",
+        content:
+          "High churn was eroding recurring revenue, but business teams lacked a consolidated view of churn drivers across contract terms, segments, and usage behavior.",
+      },
+      {
+        label: "Data",
+        content: "Databel dataset with 6,687 customers and 1,796 churned customers (26.86% churn rate).",
+      },
+      {
+        label: "Analysis",
+        content:
+          "Built 10 interactive Power BI pages with DAX measures to segment churn by contracts, demographics, charges, usage behavior, and geographic factors.",
+      },
+      {
+        label: "Insights",
+        content:
+          "Short contracts, low-tenure segments, and specific service patterns were consistently associated with significantly higher churn risk.",
+      },
+      {
+        label: "Business impact",
+        content:
+          "Enabled teams to prioritize high-ROI retention actions such as contract conversion campaigns, onboarding improvements, and support quality interventions.",
+      },
     ],
   },
   {
-    title: "HR Analytics — Employee Attrition Dashboard",
+    title: "Improving Workforce Retention – HR Attrition Analytics",
     shortDescription:
-      "Interactive Power BI dashboard built on Atlas Labs HR data (1,470 employees) to track attrition drivers across tenure, overtime, travel, satisfaction, and department exposure.",
-    fullDescription:
-      "This HR Analytics project focuses on employee attrition analysis to support data-driven retention decisions. The dashboard combines workforce KPIs, demographics, performance and satisfaction tracking, and detailed attrition diagnostics in one navigable report. Built with a star-schema model and dedicated DAX measures table, it highlights risk patterns across early tenure, overtime, frequent travel, and role-level exposure while keeping calculations consistent and maintainable.",
+      "HR analytics dashboard on 1,470 employees to detect attrition signals across tenure, overtime, travel, and satisfaction for proactive retention planning.",
     thumbnail: "/images/projects/hr-attrition/overview.png",
     images: [
       { src: "/images/projects/hr-attrition/overview.png", label: "Overview" },
@@ -61,52 +132,83 @@ const projects: Project[] = [
       { src: "/images/projects/hr-attrition/performance-tracker.png", label: "Performance Tracker" },
       { src: "/images/projects/hr-attrition/attrition.png", label: "Attrition Analysis" },
     ],
-    skills: [
-      "Power BI",
-      "DAX",
-      "Power Query",
-      "Data Modeling",
-      "HR Analytics",
-      "Business Intelligence",
-    ],
+    skills: ["Power BI", "DAX", "Power Query", "Data Modeling", "HR Analytics", "Business Intelligence"],
     github: "https://github.com/AbdelbassitAb/HR-analytics---power-bi",
-    highlights: [
-      "Overall workforce snapshot: 1,470 employees with ~16.1% attrition (~237 leavers)",
-      "Highest attrition appears in early tenure windows, especially the first 1–2 years",
-      "Overtime employees show materially higher attrition, acting as a leading risk signal",
-      "Frequent business travel correlates with increased turnover compared with non-travel employees",
-      "Lower satisfaction scores often precede exits, supporting proactive retention monitoring",
-      "Attrition is concentrated in specific departments and roles, suggesting structural team-level issues",
+    impact: [
+      "Quantified attrition at ~16.1% (~237 leavers), establishing a measurable baseline for retention initiatives.",
+      "Highlighted high-risk profiles in early tenure and overtime populations, enabling targeted HR actions.",
+      "Improved decision quality by consolidating workforce, performance, and satisfaction indicators into a single model.",
+    ],
+    sections: [
+      {
+        label: "Problem",
+        content:
+          "HR leaders needed a clearer understanding of why attrition was concentrated in specific teams and profiles, but data was fragmented across metrics and reports.",
+      },
+      {
+        label: "Data",
+        content: "Atlas Labs HR dataset covering workforce demographics, tenure, travel, satisfaction, and performance variables.",
+      },
+      {
+        label: "Analysis",
+        content:
+          "Built a star-schema model and DAX measures to track attrition patterns by tenure, overtime, travel frequency, and department-level exposure.",
+      },
+      {
+        label: "Insights",
+        content:
+          "Attrition risk peaks in early tenure and rises with overtime and frequent travel, while lower satisfaction often precedes exits.",
+      },
+      {
+        label: "Business impact",
+        content:
+          "Provided a practical framework for proactive retention monitoring, helping HR prioritize intervention areas with stronger business impact.",
+      },
     ],
   },
   {
-    title: "Food & Beverage - Marketing Analytics Platform",
+    title: "Marketing Performance Optimization – Food & Beverage Analytics",
     shortDescription:
-      "End-to-end marketing analytics project combining Snowflake pipelines, Streamlit dashboards, and machine learning to support smarter decisions under tight budget constraints.",
-    fullDescription:
-      "This project was built for a fictional food and beverage company facing lower sales, a 30% reduction in marketing budget, and a loss of market share. The solution covers the full analytics workflow: ingesting raw CSV, TSV, and JSON data into Snowflake, cleaning and standardizing data through bronze and silver layers, creating stable analytics tables for reuse, and exposing the resulting data product for BI, Streamlit dashboards, and machine learning use cases. The focus is on turning scattered operational data into a reliable analytics foundation for campaign optimization and business decision-making.",
+      "End-to-end analytics foundation using Snowflake, SQL, and Streamlit to optimize marketing decisions under a 30% budget reduction context.",
     thumbnail: "/images/projects/food-beverage/Overview.png",
     images: [
       { src: "/images/projects/food-beverage/Overview.png", label: "Overview" },
       { src: "/images/projects/food-beverage/Sales.png", label: "Sales Analysis" },
       { src: "/images/projects/food-beverage/Promotion.png", label: "Promotion Analysis" },
     ],
-    skills: [
-      "Snowflake",
-      "Streamlit",
-      "Machine Learning",
-      "SQL",
-      "Analytics Engineering",
-      "Data Cleaning",
-    ],
+    skills: ["Snowflake", "Streamlit", "Machine Learning", "SQL", "Analytics Engineering", "Data Cleaning"],
     github: "https://github.com/AbdelbassitAb/FOOD-BEVERAGE",
-    highlights: [
-      "Built a 3-layer architecture across bronze, silver, and analytics schemas for dependable downstream analysis",
-      "Loaded mixed-format source data from CSV, TSV, JSON, and S3 into Snowflake with fit-for-purpose ingestion rules",
-      "Applied text cleanup, type harmonization, deduplication, and business validation before analytics consumption",
-      "Converted exploratory analysis into reusable analytics tables designed for dashboards, advanced analysis, and ML",
-      "Framed the project around marketing optimization during a 30% budget cut and declining market share",
-      "Delivered a data product approach focused on reporting, campaign optimization, and future predictive modeling",
+    impact: [
+      "Built a reusable 3-layer data architecture to improve analytics consistency across reporting and ML use cases.",
+      "Standardized mixed-format source ingestion (CSV, TSV, JSON, S3), reducing downstream cleaning effort.",
+      "Enabled campaign and sales analysis with stronger data foundations during a constrained budget scenario.",
+    ],
+    sections: [
+      {
+        label: "Problem",
+        content:
+          "The business faced declining sales and market share while operating with a 30% smaller marketing budget, requiring better targeting decisions.",
+      },
+      {
+        label: "Data",
+        content:
+          "Raw operational and campaign data from CSV, TSV, JSON, and S3 integrated into Snowflake schemas.",
+      },
+      {
+        label: "Analysis",
+        content:
+          "Implemented bronze/silver/analytics layers, applied quality controls, and exposed curated tables for BI dashboards and exploratory modeling.",
+      },
+      {
+        label: "Insights",
+        content:
+          "Reliable campaign and sales diagnostics depend on standardized data models and upfront quality checks rather than ad hoc reporting fixes.",
+      },
+      {
+        label: "Business impact",
+        content:
+          "Created a scalable analytics product that supports reporting, optimization decisions, and future predictive marketing initiatives.",
+      },
     ],
   },
 ]
@@ -130,7 +232,6 @@ function ProjectCard({
       onClick={onClick}
       className={`group w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-card text-left transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 animate-scale-in ${isVisible ? "is-visible" : ""}`}
     >
-      {/* Thumbnail */}
       <div className="relative aspect-video w-full overflow-hidden bg-secondary">
         <Image
           src={project.thumbnail}
@@ -138,18 +239,27 @@ function ProjectCard({
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        {project.featured && (
+          <div className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-lg">
+            <Star className="h-3 w-3" />
+            Featured
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <div className="absolute bottom-3 right-3 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100 glow-primary">
+        <div className="glow-primary absolute right-3 bottom-3 rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-primary-foreground opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
           View details
         </div>
       </div>
 
-      {/* Content */}
       <div className="flex flex-col gap-3 p-6">
         <h3 className="text-lg font-semibold text-card-foreground transition-colors group-hover:text-primary">{project.title}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
           {project.shortDescription}
         </p>
+        <div className="rounded-lg border border-primary/20 bg-primary/5 p-3">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-primary">Impact</p>
+          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{project.impact[0]}</p>
+        </div>
         <div className="flex flex-wrap gap-2">
           {project.skills.slice(0, 4).map((skill) => (
             <span
@@ -203,7 +313,6 @@ function ProjectModal({
   }, [onClose, goNext, goPrev])
 
   useEffect(() => {
-    // Fires once whenever a project modal is opened.
     trackProject("open_modal", project.title)
   }, [project.title])
 
@@ -218,16 +327,14 @@ function ProjectModal({
       aria-label={project.title}
     >
       <div className="relative w-full max-w-5xl animate-[fadeInScale_0.3s_ease-out] rounded-2xl border border-border bg-card shadow-2xl shadow-primary/5">
-        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-destructive hover:text-foreground hover:scale-110"
+          className="absolute top-4 right-4 z-10 rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-destructive hover:text-foreground"
           aria-label="Close modal"
         >
           <X className="h-4 w-4" />
         </button>
 
-        {/* Image carousel */}
         <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl bg-secondary">
           <Image
             src={project.images[currentImage].src}
@@ -240,14 +347,14 @@ function ProjectModal({
             <>
               <button
                 onClick={goPrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground hover:scale-110"
+                className="absolute top-1/2 left-3 -translate-y-1/2 rounded-full bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={goNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground hover:scale-110"
+                className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
                 aria-label="Next image"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -255,13 +362,11 @@ function ProjectModal({
             </>
           )}
 
-          {/* Image label + counter */}
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-background/80 px-4 py-1.5 text-xs font-medium text-foreground backdrop-blur-sm">
             {project.images[currentImage].label} ({currentImage + 1}/{project.images.length})
           </div>
         </div>
 
-        {/* Thumbnails strip */}
         {project.images.length > 1 && (
           <div className="flex gap-2 overflow-x-auto border-b border-border bg-secondary/30 p-3">
             {project.images.map((img, i) => (
@@ -293,32 +398,40 @@ function ProjectModal({
           </div>
         )}
 
-        {/* Content */}
         <div className="flex flex-col gap-6 p-6 md:p-8">
           <div>
+            <div className="mb-2 flex items-center gap-2">
+              {project.featured && (
+                <span className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                  <Star className="h-3 w-3" />
+                  Featured project
+                </span>
+              )}
+            </div>
             <h2 className="text-2xl font-bold text-card-foreground">{project.title}</h2>
           </div>
 
-          <p className="leading-relaxed text-muted-foreground">{project.fullDescription}</p>
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">Impact</h3>
+            <ul className="grid gap-2.5">
+              {project.impact.map((point, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Key insights */}
-          {project.highlights.length > 0 && (
-            <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
-              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-                Key Insights
-              </h3>
-              <ul className="grid gap-2.5">
-                {project.highlights.map((highlight, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div className="grid gap-4 md:grid-cols-2">
+            {project.sections.map((section) => (
+              <div key={section.label} className="rounded-lg border border-border bg-card/40 p-4">
+                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">{section.label}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{section.content}</p>
+              </div>
+            ))}
+          </div>
 
-          {/* Skills */}
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
               Technologies Used
@@ -335,7 +448,6 @@ function ProjectModal({
             </div>
           </div>
 
-          {/* GitHub link */}
           <div className="border-t border-border pt-6">
             <a
               href={project.github}
@@ -345,7 +457,7 @@ function ProjectModal({
                 trackProject("github_click", project.title)
                 trackContactIntentAction("github")
               }}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 glow-primary-hover"
+              className="glow-primary-hover inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
             >
               <Github className="h-4 w-4" />
               View Full Project on GitHub
@@ -395,11 +507,15 @@ export function ProjectsSection() {
       <div className="mx-auto max-w-6xl">
         <div
           ref={headerRef}
-          className={`mb-12 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
+          className={`mb-4 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
         >
           <FolderOpen className="h-5 w-5 text-primary" />
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Projects</h2>
         </div>
+        <p className="mb-12 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          A selection of projects focused on one objective: turning complex data into decisions that improve revenue,
+          efficiency, and reporting reliability.
+        </p>
 
         <div className="grid gap-8 md:grid-cols-2">
           {projects.map((project, index) => (
