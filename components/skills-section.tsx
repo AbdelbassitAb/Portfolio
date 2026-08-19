@@ -5,9 +5,7 @@ import {
   BarChart3,
   Settings,
   Workflow,
-  Cloud,
-  Database,
-  GitBranch,
+  FlaskConical,
   ListTree,
   LineChart,
   ClipboardCheck,
@@ -31,36 +29,23 @@ const CORE_TECHNOLOGIES = [
   "Jira",
 ]
 
+// Secondary tools that complement the Core Technologies above — deliberately
+// excludes anything already shown there to avoid listing the same tech twice.
 const technicalSkills = [
   {
-    title: "Business Intelligence & Visualization",
+    title: "BI & Reporting Tools",
     icon: BarChart3,
-    skills: ["Power BI (PL-300)", "SAP BusinessObjects", "Netvibes Data Perspectives", "Excel"],
+    skills: ["Netvibes Data Perspectives", "Excel"],
   },
   {
     title: "Data Engineering & Integration",
     icon: Workflow,
-    skills: ["Alteryx Designer", "dbt", "REST APIs", "JSON", "XML"],
+    skills: ["Alteryx Designer", "REST APIs", "JSON", "XML", "NoSQL"],
   },
   {
-    title: "Databases",
-    icon: Database,
-    skills: ["SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL"],
-  },
-  {
-    title: "Cloud Platforms",
-    icon: Cloud,
-    skills: ["Snowflake", "Microsoft Azure"],
-  },
-  {
-    title: "Programming & Data Science",
-    icon: Code2,
-    skills: ["Python (Pandas, NumPy, Matplotlib, Streamlit)"],
-  },
-  {
-    title: "DevOps & Productivity Tools",
-    icon: GitBranch,
-    skills: ["Git", "Jira"],
+    title: "Data Science Libraries",
+    icon: FlaskConical,
+    skills: ["Pandas", "NumPy", "Matplotlib"],
   },
 ]
 

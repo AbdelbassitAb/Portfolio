@@ -1,12 +1,11 @@
 "use client"
 
 import Image from "next/image"
-import { Download, Linkedin, Github, Mail, MapPin, ChevronDown } from "lucide-react"
+import { Download, Linkedin, Github, Mail, MapPin } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 import { useMagnetic } from "@/hooks/use-magnetic"
 import { trackCTA, trackEvent, trackContactIntentAction } from "@/lib/analytics"
 import { RotatingWords } from "@/components/rotating-words"
-import { TechMarquee } from "@/components/tech-marquee"
 
 function MagneticLink({
   href,
@@ -152,23 +151,8 @@ export function HeroSection() {
               Email
             </MagneticLink>
           </div>
-
-          {/* Tech marquee */}
-          <div className={`mt-2 animate-fade-up stagger-6 ${isVisible ? "is-visible" : ""}`}>
-            <TechMarquee />
-          </div>
         </div>
       </div>
-
-      {/* Scroll-down indicator */}
-      <a
-        href="#skills"
-        aria-label="Scroll to skills"
-        className="absolute bottom-4 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-muted-foreground transition-colors hover:text-primary sm:flex"
-      >
-        <span className="font-mono text-[10px] tracking-widest">SCROLL</span>
-        <ChevronDown className="h-4 w-4 animate-bounce-down" />
-      </a>
     </section>
   )
 }

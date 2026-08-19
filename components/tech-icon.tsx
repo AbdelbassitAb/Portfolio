@@ -10,7 +10,6 @@ const LOGO_MAP: Record<string, string> = {
   Snowflake: "/images/logos/snowflake.svg",
   "Microsoft Azure": "/images/logos/azure.svg",
   Python: "/images/logos/python.svg",
-  "Python (Pandas, NumPy, Matplotlib, Streamlit)": "/images/logos/python.svg",
   Pandas: "/images/logos/pandas.svg",
   NumPy: "/images/logos/numpy.svg",
   Matplotlib: "/images/logos/matplotlib.svg",
@@ -26,7 +25,6 @@ const FALLBACK_MAP: Record<string, LucideIcon> = {
   "Alteryx Designer": Workflow,
   "REST APIs": Webhook,
   XML: FileCode,
-  "SQL (CTE, Window Functions)": Database,
   SQL: Database,
   NoSQL: Braces,
 }
