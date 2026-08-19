@@ -5,6 +5,7 @@ import Image from "next/image"
 import { FolderOpen, Github, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 import { trackProject, trackProjectImpression, trackContactIntentAction } from "@/lib/analytics"
+import { handleSpotlightMove } from "@/lib/spotlight"
 
 interface Project {
   title: string
@@ -128,7 +129,8 @@ function ProjectCard({
       data-project-name={project.title}
       data-project-position={projectPosition}
       onClick={onClick}
-      className={`group w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-card text-left transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 animate-scale-in ${isVisible ? "is-visible" : ""}`}
+      onMouseMove={handleSpotlightMove}
+      className={`spotlight-card group w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-card text-left transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 animate-scale-in ${isVisible ? "is-visible" : ""}`}
     >
       {/* Thumbnail */}
       <div className="relative aspect-video w-full overflow-hidden bg-secondary">
@@ -398,6 +400,7 @@ export function ProjectsSection() {
           className={`mb-12 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
         >
           <FolderOpen className="h-5 w-5 text-primary" />
+          <span className="font-mono text-xs tracking-widest text-muted-foreground">04</span>
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Projects</h2>
         </div>
 

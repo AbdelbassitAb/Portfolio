@@ -2,6 +2,8 @@
 
 import { Code2, BarChart3, Settings, Workflow, Cloud } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { TechIcon } from "@/components/tech-icon"
+import { handleSpotlightMove } from "@/lib/spotlight"
 
 const skillCategories = [
   {
@@ -25,7 +27,7 @@ const skillCategories = [
   {
     title: "Programming & DevOps",
     icon: Code2,
-    tech: ["Python (Pandas, NumPy, Matplotlib)", "Streamlit", "Power Query", "Git", "Jira"],
+    tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit", "Power Query", "Git", "Jira"],
     concepts: ["CI/CD", "Automation"],
   },
   {
@@ -114,6 +116,7 @@ export function SkillsSection() {
           className={`mb-12 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
         >
           <Code2 className="h-5 w-5 text-primary" />
+          <span className="font-mono text-xs tracking-widest text-muted-foreground">02</span>
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Technical Stack</h2>
         </div>
 
@@ -121,7 +124,8 @@ export function SkillsSection() {
           {skillCategories.map((cat, i) => (
             <div
               key={cat.title}
-              className={`rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${gridVisible ? "is-visible" : ""}`}
+              onMouseMove={handleSpotlightMove}
+              className={`spotlight-card rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${gridVisible ? "is-visible" : ""}`}
             >
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
@@ -133,8 +137,9 @@ export function SkillsSection() {
                 {cat.tech.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
+                    className="inline-flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
                   >
+                    <TechIcon name={skill} className="h-3.5 w-3.5" />
                     {skill}
                   </span>
                 ))}

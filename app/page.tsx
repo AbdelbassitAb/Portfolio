@@ -5,25 +5,22 @@ import { EducationSection } from "@/components/education-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { Footer } from "@/components/footer"
 import { EngagementTracker } from "@/components/engagement-tracker"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { SectionDivider } from "@/components/section-divider"
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       <EngagementTracker />
+      <ScrollProgress />
       <Navbar />
       <main>
         <HeroSection />
-        <div className="mx-auto max-w-6xl px-6">
-          <hr className="border-border" />
-        </div>
+        <SectionDivider />
         <SkillsSection />
-        <div className="mx-auto max-w-6xl px-6">
-          <hr className="border-border" />
-        </div>
+        <SectionDivider />
         <EducationSection />
-        <div className="mx-auto max-w-6xl px-6">
-          <hr className="border-border" />
-        </div>
+        <SectionDivider />
         <ProjectsSection />
       </main>
       <Footer />

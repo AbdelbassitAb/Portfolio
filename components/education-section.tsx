@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { GraduationCap, Award, ExternalLink } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { handleSpotlightMove } from "@/lib/spotlight"
 
 const education = [
   {
@@ -68,6 +69,7 @@ export function EducationSection() {
             className={`mb-12 flex items-center gap-3 animate-fade-up ${eduHeaderVisible ? "is-visible" : ""}`}
           >
             <GraduationCap className="h-5 w-5 text-primary" />
+            <span className="font-mono text-xs tracking-widest text-muted-foreground">03</span>
             <h2 className="text-2xl font-bold tracking-tight text-foreground">Education</h2>
           </div>
 
@@ -75,7 +77,8 @@ export function EducationSection() {
             {education.map((edu, i) => (
               <div
                 key={edu.degree}
-                className={`flex gap-4 rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${eduGridVisible ? "is-visible" : ""}`}
+                onMouseMove={handleSpotlightMove}
+                className={`spotlight-card flex gap-4 rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${eduGridVisible ? "is-visible" : ""}`}
               >
                 {/* School logo */}
                 <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-foreground/90">
@@ -114,7 +117,8 @@ export function EducationSection() {
             {certifications.map((cert, i) => (
               <div
                 key={cert.name}
-                className={`group overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${certGridVisible ? "is-visible" : ""}`}
+                onMouseMove={handleSpotlightMove}
+                className={`spotlight-card group overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${certGridVisible ? "is-visible" : ""}`}
               >
                 {/* Certificate image */}
                 {cert.image && (
