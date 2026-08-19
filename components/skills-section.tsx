@@ -26,7 +26,6 @@ const CORE_TECHNOLOGIES = [
   "Git",
   "Streamlit",
   "SAP BusinessObjects",
-  "Jira",
 ]
 
 // Secondary tools that complement the Core Technologies above — deliberately

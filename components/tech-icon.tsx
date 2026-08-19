@@ -15,7 +15,6 @@ const LOGO_MAP: Record<string, string> = {
   Matplotlib: "/images/logos/matplotlib.svg",
   Streamlit: "/images/logos/streamlit.svg",
   Git: "/images/logos/git.svg",
-  Jira: "/images/logos/jira.svg",
   dbt: "/images/logos/dbt.svg",
 }
 
