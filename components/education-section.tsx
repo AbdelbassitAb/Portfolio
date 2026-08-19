@@ -33,7 +33,7 @@ const certifications = [
     name: "Microsoft PL-300: Power BI Data Analyst Associate",
     status: "Certified",
     image: "/images/certs/microsoft-pl300.png",
-    link: "https://learn.microsoft.com/api/credentials/share/en-us/AbdelbassitAbedmeraim-5770/8ECF9C83B56745CC?sharingId=E0A78BC6F66991DC",
+    link: "https://learn.microsoft.com/api/credentials/share/fr-fr/AbdelbassitAbedmeraim-5770/8ECF9C83B56745CC?sharingId=3D32194CFCEE77A7",
     date: "January 2026",
   },
   {
