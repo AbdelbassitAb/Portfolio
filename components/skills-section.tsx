@@ -22,6 +22,7 @@ const CORE_TECHNOLOGIES = [
   "Python",
   "SQL",
   "Snowflake",
+  "dbt",
   "Microsoft Azure",
   "PostgreSQL",
   "Git",
@@ -34,12 +35,12 @@ const technicalSkills = [
   {
     title: "Business Intelligence & Visualization",
     icon: BarChart3,
-    skills: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel"],
+    skills: ["Power BI (PL-300)", "SAP BusinessObjects", "Netvibes Data Perspectives", "Excel"],
   },
   {
     title: "Data Engineering & Integration",
     icon: Workflow,
-    skills: ["Alteryx Designer", "REST APIs", "JSON", "XML"],
+    skills: ["Alteryx Designer", "dbt", "REST APIs", "JSON", "XML"],
   },
   {
     title: "Databases",
@@ -54,12 +55,12 @@ const technicalSkills = [
   {
     title: "Programming & Data Science",
     icon: Code2,
-    skills: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit"],
+    skills: ["Python (Pandas, NumPy, Matplotlib, Streamlit)"],
   },
   {
     title: "DevOps & Productivity Tools",
     icon: GitBranch,
-    skills: ["Git", "Power Query", "Jira"],
+    skills: ["Git", "Jira"],
   },
 ]
 

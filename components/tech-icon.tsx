@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Webhook, FileCode, Database, Table2, Wand2, Workflow, LayoutDashboard, Braces, type LucideIcon } from "lucide-react"
+import { Webhook, FileCode, Database, Table2, Workflow, LayoutDashboard, Braces, type LucideIcon } from "lucide-react"
 
 const LOGO_MAP: Record<string, string> = {
   "Power BI (PL-300)": "/images/logos/power-bi.svg",
@@ -10,16 +10,18 @@ const LOGO_MAP: Record<string, string> = {
   Snowflake: "/images/logos/snowflake.svg",
   "Microsoft Azure": "/images/logos/azure.svg",
   Python: "/images/logos/python.svg",
+  "Python (Pandas, NumPy, Matplotlib, Streamlit)": "/images/logos/python.svg",
   Pandas: "/images/logos/pandas.svg",
   NumPy: "/images/logos/numpy.svg",
   Matplotlib: "/images/logos/matplotlib.svg",
   Streamlit: "/images/logos/streamlit.svg",
   Git: "/images/logos/git.svg",
   Jira: "/images/logos/jira.svg",
+  dbt: "/images/logos/dbt.svg",
 }
 
 const FALLBACK_MAP: Record<string, LucideIcon> = {
-  "Data Perspectives": LayoutDashboard,
+  "Netvibes Data Perspectives": LayoutDashboard,
   Excel: Table2,
   "Alteryx Designer": Workflow,
   "REST APIs": Webhook,
@@ -27,7 +29,6 @@ const FALLBACK_MAP: Record<string, LucideIcon> = {
   "SQL (CTE, Window Functions)": Database,
   SQL: Database,
   NoSQL: Braces,
-  "Power Query": Wand2,
 }
 
 export function TechIcon({ name, className = "h-4 w-4", size = 16 }: { name: string; className?: string; size?: number }) {
