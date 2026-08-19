@@ -23,13 +23,6 @@ const education = [
 
 const certifications = [
   {
-    name: "Alteryx Designer Core",
-    status: "Certified",
-    image: "/images/certs/alteryx-designer-core.png",
-    link: "https://www.credly.com/badges/86fab8ea-872b-4857-958a-da0128ff570d/public_url",
-    date: "June 2026",
-  },
-  {
     name: "Microsoft PL-300: Power BI Data Analyst Associate",
     status: "Certified",
     image: "/images/certs/microsoft-pl300.png",
@@ -42,6 +35,13 @@ const certifications = [
     image: "/images/certs/datacamp-analyst.jpg",
     link: "https://www.datacamp.com/certificate/DAA0010467975082",
     date: "November 2025",
+  },
+  {
+    name: "Alteryx Designer Core",
+    status: "Certified",
+    image: "/images/certs/alteryx-designer-core.png",
+    link: "https://www.credly.com/badges/86fab8ea-872b-4857-958a-da0128ff570d/public_url",
+    date: "June 2026",
   },
   {
     name: "Microsoft DP-600: Fabric Analytics Engineer Associate",
