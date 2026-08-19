@@ -41,7 +41,7 @@ export function trackNavigation(sectionName: string) {
   })
 }
 
-export type ProjectInteractionAction = "card_click" | "open_modal" | "github_click"
+export type ProjectInteractionAction = "card_click" | "open_page" | "github_click"
 
 export function trackProject(action: ProjectInteractionAction, projectName: string) {
   trackEvent("project_interaction", {
