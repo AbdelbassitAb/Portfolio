@@ -30,10 +30,10 @@ const FALLBACK_MAP: Record<string, LucideIcon> = {
   "Power Query": Wand2,
 }
 
-export function TechIcon({ name, className = "h-4 w-4" }: { name: string; className?: string }) {
+export function TechIcon({ name, className = "h-4 w-4", size = 16 }: { name: string; className?: string; size?: number }) {
   const logo = LOGO_MAP[name]
   if (logo) {
-    return <Image src={logo} alt="" width={16} height={16} aria-hidden className={`${className} object-contain`} />
+    return <Image src={logo} alt="" width={size} height={size} aria-hidden className={`${className} object-contain`} />
   }
 
   const FallbackIcon = FALLBACK_MAP[name]

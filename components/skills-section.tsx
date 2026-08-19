@@ -1,40 +1,83 @@
 "use client"
 
-import { Code2, BarChart3, Settings, Workflow, Cloud } from "lucide-react"
+import {
+  Code2,
+  BarChart3,
+  Settings,
+  Workflow,
+  Cloud,
+  Database,
+  GitBranch,
+  ListTree,
+  LineChart,
+  ClipboardCheck,
+  Sparkles,
+} from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 import { TechIcon } from "@/components/tech-icon"
 import { handleSpotlightMove } from "@/lib/spotlight"
 
-const skillCategories = [
+const CORE_TECHNOLOGIES = [
+  "Power BI",
+  "Python",
+  "SQL",
+  "Snowflake",
+  "Microsoft Azure",
+  "PostgreSQL",
+  "Git",
+  "Streamlit",
+  "SAP BusinessObjects",
+  "Jira",
+]
+
+const technicalSkills = [
   {
-    title: "BI & Data Visualization",
+    title: "Business Intelligence & Visualization",
     icon: BarChart3,
-    tech: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel"],
-    concepts: ["Data Visualization"],
+    skills: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel"],
   },
   {
-    title: "Data Engineering",
+    title: "Data Engineering & Integration",
     icon: Workflow,
-    tech: ["Alteryx Designer", "REST APIs", "JSON", "XML"],
-    concepts: ["ETL / ELT", "Data Pipelines", "Medallion Architecture", "Data Modeling", "Data Warehousing", "Data Quality"],
+    skills: ["Alteryx Designer", "REST APIs", "JSON", "XML"],
   },
   {
-    title: "Databases & Cloud",
+    title: "Databases",
+    icon: Database,
+    skills: ["SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL"],
+  },
+  {
+    title: "Cloud Platforms",
     icon: Cloud,
-    tech: ["SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL", "Snowflake", "Microsoft Azure"],
-    concepts: [],
+    skills: ["Snowflake", "Microsoft Azure"],
   },
   {
-    title: "Programming & DevOps",
+    title: "Programming & Data Science",
     icon: Code2,
-    tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit", "Power Query", "Git", "Jira"],
-    concepts: ["CI/CD", "Automation"],
+    skills: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit"],
+  },
+  {
+    title: "DevOps & Productivity Tools",
+    icon: GitBranch,
+    skills: ["Git", "Power Query", "Jira"],
+  },
+]
+
+const professionalSkills = [
+  {
+    title: "Data Engineering Practices",
+    icon: ListTree,
+    skills: ["ETL / ELT", "Data Pipelines", "Medallion Architecture", "Data Modeling", "Data Warehousing", "Data Quality", "Automation", "CI/CD"],
+  },
+  {
+    title: "Analytics & Visualization Practices",
+    icon: LineChart,
+    skills: ["Data Visualization", "KPI Design", "Dashboard Design"],
   },
   {
     title: "Methods & Governance",
-    icon: Settings,
-    tech: [],
-    concepts: ["Agile Scrum", "BPMN", "GDPR", "Process Formalization", "Workshop Facilitation", "Functional Specifications", "Change Management"],
+    icon: ClipboardCheck,
+    skills: ["Agile Scrum", "BPMN", "GDPR", "Process Formalization", "Workshop Facilitation", "Functional Specifications", "Change Management"],
   },
 ]
 
@@ -105,7 +148,11 @@ function FlagIcon({ code }: { code: string }) {
 
 export function SkillsSection() {
   const { ref: headerRef, isVisible: headerVisible } = useAnimateOnScroll(0.1)
-  const { ref: gridRef, isVisible: gridVisible } = useAnimateOnScroll(0.1)
+  const { ref: coreRef, isVisible: coreVisible } = useAnimateOnScroll(0.1)
+  const { ref: techHeaderRef, isVisible: techHeaderVisible } = useAnimateOnScroll(0.1)
+  const { ref: techGridRef, isVisible: techGridVisible } = useAnimateOnScroll(0.1)
+  const { ref: profHeaderRef, isVisible: profHeaderVisible } = useAnimateOnScroll(0.1)
+  const { ref: profGridRef, isVisible: profGridVisible } = useAnimateOnScroll(0.1)
   const { ref: langRef, isVisible: langVisible } = useAnimateOnScroll(0.1)
 
   return (
@@ -120,44 +167,112 @@ export function SkillsSection() {
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Technical Stack</h2>
         </div>
 
-        <div ref={gridRef} className="grid gap-6 md:grid-cols-3">
-          {skillCategories.map((cat, i) => (
-            <div
-              key={cat.title}
-              onMouseMove={handleSpotlightMove}
-              className={`spotlight-card rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${gridVisible ? "is-visible" : ""}`}
-            >
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-                  <cat.icon className="h-4 w-4 text-primary" />
+        {/* Core Technologies — big logo showcase */}
+        <div className="mb-16">
+          <div
+            ref={coreRef}
+            className={`mb-8 flex items-center gap-2 animate-fade-up ${coreVisible ? "is-visible" : ""}`}
+          >
+            <Sparkles className="h-4 w-4 text-primary" />
+            <h3 className="text-lg font-semibold text-foreground">Core Technologies</h3>
+          </div>
+          <div className="grid grid-cols-3 gap-4 sm:grid-cols-5">
+            {CORE_TECHNOLOGIES.map((tech, i) => (
+              <div
+                key={tech}
+                onMouseMove={handleSpotlightMove}
+                className={`spotlight-card flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-card px-4 py-6 text-center transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${(i % 8) + 1} ${coreVisible ? "is-visible" : ""}`}
+              >
+                <TechIcon name={tech} size={40} className="h-10 w-10" />
+                <span className="text-xs font-medium text-card-foreground">{tech}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Technical Skills */}
+        <div className="mb-16">
+          <div
+            ref={techHeaderRef}
+            className={`mb-2 flex items-center gap-2 animate-fade-up ${techHeaderVisible ? "is-visible" : ""}`}
+          >
+            <h3 className="text-lg font-semibold text-foreground">Technical Skills</h3>
+          </div>
+          <p className={`mb-8 text-sm text-muted-foreground animate-fade-up ${techHeaderVisible ? "is-visible" : ""}`}>
+            Tools, languages, and platforms I work with directly
+          </p>
+
+          <div ref={techGridRef} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {technicalSkills.map((cat, i) => (
+              <div
+                key={cat.title}
+                onMouseMove={handleSpotlightMove}
+                className={`spotlight-card rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${techGridVisible ? "is-visible" : ""}`}
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+                    <cat.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <h4 className="font-semibold text-card-foreground">{cat.title}</h4>
                 </div>
-                <h3 className="font-semibold text-card-foreground">{cat.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
+                    >
+                      <TechIcon name={skill} className="h-3.5 w-3.5" />
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {cat.tech.map((skill) => (
-                  <span
-                    key={skill}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
-                  >
-                    <TechIcon name={skill} className="h-3.5 w-3.5" />
-                    {skill}
-                  </span>
-                ))}
-                {cat.concepts.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-md bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground transition-colors hover:bg-secondary/70"
-                  >
-                    {skill}
-                  </span>
-                ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Professional & Methodological Skills */}
+        <div className="mb-16">
+          <div
+            ref={profHeaderRef}
+            className={`mb-2 flex items-center gap-2 animate-fade-up ${profHeaderVisible ? "is-visible" : ""}`}
+          >
+            <h3 className="text-lg font-semibold text-foreground">Professional & Methodological Skills</h3>
+          </div>
+          <p className={`mb-8 text-sm text-muted-foreground animate-fade-up ${profHeaderVisible ? "is-visible" : ""}`}>
+            Practices, methods, and ways of working — not tied to a specific tool
+          </p>
+
+          <div ref={profGridRef} className="grid gap-6 md:grid-cols-3">
+            {professionalSkills.map((cat, i) => (
+              <div
+                key={cat.title}
+                onMouseMove={handleSpotlightMove}
+                className={`spotlight-card rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 animate-fade-up stagger-${i + 1} ${profGridVisible ? "is-visible" : ""}`}
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10">
+                    <cat.icon className="h-4 w-4 text-accent" />
+                  </div>
+                  <h4 className="font-semibold text-card-foreground">{cat.title}</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-md border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/15"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Languages */}
-        <div ref={langRef} className="mt-12">
+        <div ref={langRef}>
           <h3 className={`mb-6 text-lg font-semibold text-foreground animate-fade-up ${langVisible ? "is-visible" : ""}`}>Languages</h3>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {languages.map((lang, i) => (
