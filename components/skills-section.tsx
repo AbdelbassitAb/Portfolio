@@ -5,29 +5,34 @@ import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 
 const skillCategories = [
   {
-    title: "BI & Dataviz",
+    title: "BI & Data Visualization",
     icon: BarChart3,
-    skills: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel", "Data Visualization"],
+    tech: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel"],
+    concepts: ["Data Visualization"],
   },
   {
     title: "Data Engineering",
     icon: Workflow,
-    skills: ["Alteryx Designer", "ETL / ELT", "Data Pipelines", "Medallion Architecture", "REST APIs", "Data Warehousing", "Data Quality"],
+    tech: ["Alteryx Designer", "REST APIs", "JSON", "XML"],
+    concepts: ["ETL / ELT", "Data Pipelines", "Medallion Architecture", "Data Modeling", "Data Warehousing", "Data Quality"],
   },
   {
-    title: "Cloud & Databases",
+    title: "Databases & Cloud",
     icon: Cloud,
-    skills: ["Snowflake", "Microsoft Azure", "SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL"],
+    tech: ["SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL", "Snowflake", "Microsoft Azure"],
+    concepts: [],
   },
   {
-    title: "Programming & Automation",
+    title: "Programming & DevOps",
     icon: Code2,
-    skills: ["Python (Pandas, NumPy, Matplotlib)", "Streamlit", "Power Query", "Git", "CI/CD"],
+    tech: ["Python (Pandas, NumPy, Matplotlib)", "Streamlit", "Power Query", "Git", "Jira"],
+    concepts: ["CI/CD", "Automation"],
   },
   {
     title: "Methods & Governance",
     icon: Settings,
-    skills: ["Agile Scrum", "BPMN", "GDPR", "Process Formalization", "Change Management", "Jira"],
+    tech: [],
+    concepts: ["Agile Scrum", "BPMN", "GDPR", "Process Formalization", "Workshop Facilitation", "Functional Specifications", "Change Management"],
   },
 ]
 
@@ -125,10 +130,18 @@ export function SkillsSection() {
                 <h3 className="font-semibold text-card-foreground">{cat.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
+                {cat.tech.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-md bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                    className="rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
+                  >
+                    {skill}
+                  </span>
+                ))}
+                {cat.concepts.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-md bg-secondary px-3 py-1.5 text-xs font-medium text-secondary-foreground transition-colors hover:bg-secondary/70"
                   >
                     {skill}
                   </span>
