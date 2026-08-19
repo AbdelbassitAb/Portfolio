@@ -33,16 +33,18 @@ export function HeroSection() {
         {/* Text content */}
         <div className="flex flex-1 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
           <div className={`flex flex-col gap-2 animate-fade-up ${isVisible ? "is-visible" : ""}`}>
-            <p className="font-mono text-sm tracking-wider text-primary">Data Analyst</p>
+            <p className="font-mono text-sm tracking-wider text-primary">Data Analyst | Analytics Engineer</p>
             <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               Abdelbassit Abed Meraim
             </h1>
           </div>
 
           <p className={`max-w-xl text-pretty leading-relaxed text-muted-foreground animate-fade-up stagger-2 ${isVisible ? "is-visible" : ""}`}>
-            Microsoft PL-300 certified Data Analyst (Power BI), specializing in SQL, BI reporting, and Python automation. 
-            Experienced in international environments (Sales & Procurement) with a strong focus on KPI reliability, 
-            data quality, and decision-making process optimization. Currently seeking a permanent position and available immediately.
+            Microsoft PL-300 certified Data Analyst with 3 years of international experience in business intelligence,
+            automation, and data reliability, collaborating with business teams (Sales & Procurement) and technical
+            teams (IT). Autonomous across the full data lifecycle, from gathering business requirements to reporting
+            and dashboards, through collection, cleaning, transformation, modeling, and analysis, using Power BI,
+            Python, advanced SQL, and Alteryx.
           </p>
 
           <div className={`flex items-center gap-2 text-sm text-muted-foreground animate-fade-up stagger-3 ${isVisible ? "is-visible" : ""}`}>

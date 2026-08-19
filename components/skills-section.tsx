@@ -1,23 +1,33 @@
 "use client"
 
-import { Code2, BarChart3, Settings } from "lucide-react"
+import { Code2, BarChart3, Settings, Workflow, Cloud } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 
 const skillCategories = [
   {
-    title: "Data & BI",
+    title: "BI & Dataviz",
     icon: BarChart3,
-    skills: ["Power BI", "Business Objects", "Snowflake", "Talend", "Data Perspectives"],
+    skills: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel", "Data Visualization"],
   },
   {
-    title: "Data & Automation",
+    title: "Data Engineering",
+    icon: Workflow,
+    skills: ["Alteryx Designer", "ETL / ELT", "Data Pipelines", "Medallion Architecture", "REST APIs", "Data Warehousing", "Data Quality"],
+  },
+  {
+    title: "Cloud & Databases",
+    icon: Cloud,
+    skills: ["Snowflake", "Microsoft Azure", "SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL"],
+  },
+  {
+    title: "Programming & Automation",
     icon: Code2,
-    skills: ["SQL / NoSQL", "Python", "Power Query", "PostgreSQL"],
+    skills: ["Python (Pandas, NumPy, Matplotlib)", "Streamlit", "Power Query", "Git", "CI/CD"],
   },
   {
-    title: "Environments & Methods",
+    title: "Methods & Governance",
     icon: Settings,
-    skills: ["Git", "Microsoft Azure", "Agile / Scrum"],
+    skills: ["Agile Scrum", "BPMN", "GDPR", "Process Formalization", "Change Management", "Jira"],
   },
 ]
 
