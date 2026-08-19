@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { trackNavigation } from "@/lib/analytics"
-import { CommandPalette } from "@/components/command-palette"
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -83,18 +82,14 @@ export function Navbar() {
           })}
         </ul>
 
-        <div className="flex items-center gap-3">
-          <CommandPalette />
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-foreground transition-transform hover:scale-110 md:hidden"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="text-foreground transition-transform hover:scale-110 md:hidden"
+          aria-label="Toggle navigation menu"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </nav>
 
       {/* Mobile nav */}

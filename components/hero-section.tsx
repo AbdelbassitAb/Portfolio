@@ -1,38 +1,62 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Download, Linkedin, Github, Mail, MapPin, ChevronDown, Briefcase, Award, FolderOpen, Layers } from "lucide-react"
+import { Download, Linkedin, Github, Mail, MapPin, ChevronDown } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
+import { useMagnetic } from "@/hooks/use-magnetic"
 import { trackCTA, trackEvent, trackContactIntentAction } from "@/lib/analytics"
 import { RotatingWords } from "@/components/rotating-words"
 import { TechMarquee } from "@/components/tech-marquee"
-import { KpiTile } from "@/components/kpi-tile"
-import { MagneticLink } from "@/components/magnetic-link"
 
-const STATS = [
-  { icon: Briefcase, value: 3, suffix: "+", label: "Years of Experience" },
-  { icon: Award, value: 3, suffix: "", label: "Certifications Earned" },
-  { icon: FolderOpen, value: 3, suffix: "", label: "Projects Showcased" },
-  { icon: Layers, value: 10, suffix: "+", label: "Core Tools & Platforms" },
-]
+function MagneticLink({
+  href,
+  download,
+  target,
+  rel,
+  ariaLabel,
+  onClick,
+  className,
+  children,
+}: {
+  href: string
+  download?: string
+  target?: string
+  rel?: string
+  ariaLabel?: string
+  onClick?: () => void
+  className: string
+  children: React.ReactNode
+}) {
+  const { ref, onMouseMove, onMouseLeave } = useMagnetic<HTMLAnchorElement>(0.3)
+
+  return (
+    <a
+      ref={ref}
+      href={href}
+      download={download}
+      target={target}
+      rel={rel}
+      onClick={onClick}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      aria-label={ariaLabel}
+      className={`${className} transition-transform duration-200 ease-out`}
+    >
+      {children}
+    </a>
+  )
+}
 
 export function HeroSection() {
   const { ref, isVisible } = useAnimateOnScroll(0.1)
-  const [lastRefreshed, setLastRefreshed] = useState("")
-
-  useEffect(() => {
-    setLastRefreshed(new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }))
-  }, [])
 
   return (
-    <section id="about" className="bg-dot-grid relative overflow-hidden px-6 pb-20 pt-28">
+    <section id="about" className="relative overflow-hidden px-6 pb-20 pt-28">
       {/* Ambient aurora background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="aurora-blob-a absolute -top-20 left-1/4 h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl" />
         <div className="aurora-blob-b absolute top-10 right-0 h-[380px] w-[380px] rounded-full bg-accent/10 blur-3xl" />
         <div className="aurora-blob-c absolute -bottom-32 left-0 h-[320px] w-[320px] rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/40 to-background" />
       </div>
 
       <div
@@ -54,12 +78,6 @@ export function HeroSection() {
 
         {/* Text content */}
         <div className="flex flex-1 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
-          <p
-            className={`font-mono text-[11px] text-muted-foreground/60 animate-fade-up ${isVisible ? "is-visible" : ""}`}
-          >
-            ~/portfolio/abdelbassit-abed-meraim{lastRefreshed ? ` · refreshed ${lastRefreshed}` : ""}
-          </p>
-
           <div className={`flex flex-col gap-2 animate-fade-up ${isVisible ? "is-visible" : ""}`}>
             <p className="font-mono text-sm tracking-wider text-primary">Data Analyst | Analytics Engineer</p>
             <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground md:text-5xl">
@@ -81,13 +99,6 @@ export function HeroSection() {
             and dashboards, through collection, cleaning, transformation, modeling, and analysis, using Power BI,
             Python, advanced SQL, and Alteryx.
           </p>
-
-          {/* KPI stat strip */}
-          <div className={`grid w-full grid-cols-2 gap-3 animate-fade-up stagger-4 sm:grid-cols-4 ${isVisible ? "is-visible" : ""}`}>
-            {STATS.map((stat, i) => (
-              <KpiTile key={stat.label} icon={stat.icon} value={stat.value} suffix={stat.suffix} label={stat.label} delayMs={i * 120} />
-            ))}
-          </div>
 
           <div className={`flex items-center gap-2 text-sm text-muted-foreground animate-fade-up stagger-4 ${isVisible ? "is-visible" : ""}`}>
             <MapPin className="h-4 w-4 text-primary" />
