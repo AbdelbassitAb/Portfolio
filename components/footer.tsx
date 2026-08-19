@@ -19,12 +19,12 @@ export function Footer() {
 
         <div className={`flex flex-wrap items-center justify-center gap-4 animate-fade-up stagger-2 ${isVisible ? "is-visible" : ""}`}>
           <a
-            href="mailto:ia_abedmeraim@esi.dz"
+            href="mailto:ab.abedmeraim@gmail.com"
             onClick={() => trackCTA("email", "footer")}
             className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-md hover:shadow-primary/5"
           >
             <Mail className="h-4 w-4" />
-            ia_abedmeraim@esi.dz
+            ab.abedmeraim@gmail.com
           </a>
           <a
             href="tel:+33605591453"

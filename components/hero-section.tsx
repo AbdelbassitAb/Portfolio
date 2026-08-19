@@ -88,7 +88,7 @@ export function HeroSection() {
               GitHub
             </a>
             <a
-              href="mailto:ia_abedmeraim@esi.dz"
+              href="mailto:ab.abedmeraim@gmail.com"
               onClick={() => trackCTA("email", "hero")}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2.5 text-sm font-medium text-secondary-foreground transition-all hover:border-primary/40 hover:text-primary"
               aria-label="Send email"
