@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { EngagementTracker } from "@/components/engagement-tracker"
 import { ScrollProgress } from "@/components/scroll-progress"
 import { SectionDivider } from "@/components/section-divider"
+import { TechFilterProvider } from "@/lib/tech-filter-context"
 
 export default function Home() {
   return (
@@ -14,15 +15,17 @@ export default function Home() {
       <EngagementTracker />
       <ScrollProgress />
       <Navbar />
-      <main>
-        <HeroSection />
-        <SectionDivider />
-        <SkillsSection />
-        <SectionDivider />
-        <EducationSection />
-        <SectionDivider />
-        <ProjectsSection />
-      </main>
+      <TechFilterProvider>
+        <main>
+          <HeroSection />
+          <SectionDivider />
+          <SkillsSection />
+          <SectionDivider />
+          <EducationSection />
+          <SectionDivider />
+          <ProjectsSection />
+        </main>
+      </TechFilterProvider>
       <Footer />
     </div>
   )

@@ -1,36 +1,42 @@
 "use client"
 
-import { Code2, BarChart3, Settings, Workflow, Cloud } from "lucide-react"
+import { Code2, BarChart3, Settings, Workflow, Cloud, MousePointerClick } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 import { TechIcon } from "@/components/tech-icon"
 import { handleSpotlightMove } from "@/lib/spotlight"
+import { useTechFilter } from "@/lib/tech-filter-context"
 
 const skillCategories = [
   {
+    code: "BI-01",
     title: "BI & Data Visualization",
     icon: BarChart3,
     tech: ["Power BI (PL-300)", "SAP BusinessObjects", "Data Perspectives", "Excel"],
     concepts: ["Data Visualization"],
   },
   {
+    code: "ENG-02",
     title: "Data Engineering",
     icon: Workflow,
     tech: ["Alteryx Designer", "REST APIs", "JSON", "XML"],
     concepts: ["ETL / ELT", "Data Pipelines", "Medallion Architecture", "Data Modeling", "Data Warehousing", "Data Quality"],
   },
   {
+    code: "DB-03",
     title: "Databases & Cloud",
     icon: Cloud,
     tech: ["SQL (CTE, Window Functions)", "PostgreSQL", "NoSQL", "Snowflake", "Microsoft Azure"],
     concepts: [],
   },
   {
+    code: "DEV-04",
     title: "Programming & DevOps",
     icon: Code2,
     tech: ["Python", "Pandas", "NumPy", "Matplotlib", "Streamlit", "Power Query", "Git", "Jira"],
     concepts: ["CI/CD", "Automation"],
   },
   {
+    code: "GOV-05",
     title: "Methods & Governance",
     icon: Settings,
     tech: [],
@@ -107,18 +113,25 @@ export function SkillsSection() {
   const { ref: headerRef, isVisible: headerVisible } = useAnimateOnScroll(0.1)
   const { ref: gridRef, isVisible: gridVisible } = useAnimateOnScroll(0.1)
   const { ref: langRef, isVisible: langVisible } = useAnimateOnScroll(0.1)
+  const { jumpToFilter } = useTechFilter()
 
   return (
     <section id="skills" className="px-6 py-20">
       <div className="mx-auto max-w-6xl">
         <div
           ref={headerRef}
-          className={`mb-12 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
+          className={`mb-3 flex items-center gap-3 animate-fade-up ${headerVisible ? "is-visible" : ""}`}
         >
           <Code2 className="h-5 w-5 text-primary" />
           <span className="font-mono text-xs tracking-widest text-muted-foreground">02</span>
           <h2 className="text-2xl font-bold tracking-tight text-foreground">Technical Stack</h2>
         </div>
+        <p
+          className={`mb-10 flex items-center gap-1.5 text-sm text-muted-foreground animate-fade-up ${headerVisible ? "is-visible" : ""}`}
+        >
+          <MousePointerClick className="h-3.5 w-3.5 text-primary" />
+          Click a technology to see it in a real project
+        </p>
 
         <div ref={gridRef} className="grid gap-6 md:grid-cols-3">
           {skillCategories.map((cat, i) => (
@@ -127,21 +140,25 @@ export function SkillsSection() {
               onMouseMove={handleSpotlightMove}
               className={`spotlight-card rounded-xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 animate-fade-up stagger-${i + 1} ${gridVisible ? "is-visible" : ""}`}
             >
-              <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
-                  <cat.icon className="h-4 w-4 text-primary" />
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
+                    <cat.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-card-foreground">{cat.title}</h3>
                 </div>
-                <h3 className="font-semibold text-card-foreground">{cat.title}</h3>
+                <span className="font-mono text-[10px] tracking-widest text-muted-foreground/60">{cat.code}</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {cat.tech.map((skill) => (
-                  <span
+                  <button
                     key={skill}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
+                    onClick={() => jumpToFilter(skill)}
+                    className="inline-flex items-center gap-1.5 rounded-md border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
                   >
                     <TechIcon name={skill} className="h-3.5 w-3.5" />
                     {skill}
-                  </span>
+                  </button>
                 ))}
                 {cat.concepts.map((skill) => (
                   <span
