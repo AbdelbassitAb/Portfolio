@@ -1,10 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import { Download, Linkedin, Github, Mail, MapPin } from "lucide-react"
+import { Linkedin, Github, Mail, MapPin } from "lucide-react"
 import { useAnimateOnScroll } from "@/hooks/use-animate-on-scroll"
 import { useMagnetic } from "@/hooks/use-magnetic"
-import { trackCTA, trackEvent, trackContactIntentAction } from "@/lib/analytics"
+import { trackCTA } from "@/lib/analytics"
 import { RotatingWords } from "@/components/rotating-words"
 
 function MagneticLink({
@@ -106,19 +106,6 @@ export function HeroSection() {
 
           {/* CTA buttons */}
           <div className={`flex flex-wrap items-center gap-3 animate-fade-up stagger-5 ${isVisible ? "is-visible" : ""}`}>
-            <MagneticLink
-              href="/cv.pdf"
-              download="Abdelbassit-Abed-Meraim-CV.pdf"
-              onClick={() => {
-                trackCTA("download_cv", "hero")
-                trackEvent("cv_download")
-                trackContactIntentAction("cv_download")
-              }}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 glow-primary-hover"
-            >
-              <Download className="h-4 w-4" />
-              Download CV
-            </MagneticLink>
             <MagneticLink
               href="https://www.linkedin.com/in/abdelbassit-abed-meraim-909b54174/"
               target="_blank"
