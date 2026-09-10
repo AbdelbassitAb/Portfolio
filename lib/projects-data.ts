@@ -40,6 +40,30 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "mlops-house-price-prediction",
+    title: "House Price Prediction - MLOps Pipeline on Snowflake",
+    shortDescription:
+      "An end-to-end MLOps pipeline built natively in Snowflake: 22 stages from raw S3 ingestion to a tuned XGBoost model (R2 = 0.9151), registered in the Model Registry and served through a Streamlit app.",
+    fullDescription:
+      "This project runs a full house-price-prediction workflow entirely inside Snowflake, with no export of data to an external environment. The pipeline spans 22 stages across six phases: ingestion of about 1,090 JSON housing records from S3, exploratory analysis with descriptive statistics and correlation matrices, feature preparation (encoding, normalisation, and an 80/20 train/test split), training and comparison of three regressors, hyper-parameter optimisation with GridSearchCV and 3-fold cross-validation, and deployment through the Snowflake Model Registry plus a Streamlit application. XGBoost was selected for production, explaining 91.5% of price variance with the lowest error, and surface area was identified as the strongest single predictor.",
+    thumbnail: "/images/projects/mlops/cover.png",
+    images: [
+      { src: "/images/projects/mlops/cover.png", label: "Overview" },
+      { src: "/images/projects/mlops/model-comparison.png", label: "Model Comparison" },
+      { src: "/images/projects/mlops/pipeline.png", label: "Pipeline" },
+    ],
+    skills: ["Snowflake", "Python", "XGBoost", "Machine Learning", "Snowpark", "scikit-learn", "MLOps"],
+    github: "https://github.com/AbdelbassitAb/PROJET-MLOPS",
+    highlights: [
+      "22-stage pipeline across six phases, executed entirely within Snowflake with no external data export",
+      "Ingested about 1,090 JSON housing records from S3, with zero missing values in the prepared dataset",
+      "Compared Linear Regression, Random Forest, and XGBoost; XGBoost won with MAE 12,757, RMSE 27,517, and R2 0.9151",
+      "Tuned hyper-parameters with GridSearchCV and 3-fold cross-validation, keeping the model with the best generalisation",
+      "Identified surface area as the strongest driver of sale price through correlation analysis",
+      "Registered the final model in the Snowflake Model Registry and exposed predictions through a Streamlit app",
+    ],
+  },
+  {
     slug: "customer-churn-analysis",
     title: "Customer Churn Analysis -- Power BI Dashboard",
     shortDescription:
