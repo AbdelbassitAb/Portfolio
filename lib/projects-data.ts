@@ -12,58 +12,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "dq-compass",
-    title: "DQ Compass - Data Quality Control Layer",
-    shortDescription:
-      "A plug-and-play data-quality control layer for spreadsheets and CSV exports: define checks once in a catalogue and get a reproducible quality score plus a tamper-evident audit trail, with no per-file validation code.",
-    fullDescription:
-      "DQ Compass adds a governance layer over End-User Computing (EUC) applications - the spreadsheets and local scripts that sit outside IT control - so teams can work toward standards like BCBS 239 without rebuilding their systems. You point it at a spreadsheet or CSV export, describe the controls once in a CSV catalogue, and the engine produces a severity-weighted quality scorecard plus a hash-chained evidence pack. It is built from four layers: a code-free Control Catalogue, a DQ Engine that runs reusable pandas checks parameterised by column, a Reporting layer with server-rendered scorecards and coverage matrices, and an Audit layer that stores run snapshots for independent re-execution. It ships with both a dqcompass CLI and a Flask web UI, and needs no database or build step.",
-    thumbnail: "/images/projects/dq-compass/home.png",
-    images: [
-      { src: "/images/projects/dq-compass/home.png", label: "Home" },
-      { src: "/images/projects/dq-compass/catalogue.png", label: "Control Catalogue" },
-      { src: "/images/projects/dq-compass/data-sources.png", label: "Data Sources" },
-      { src: "/images/projects/dq-compass/reporting.png", label: "Reporting" },
-      { src: "/images/projects/dq-compass/run-detail.png", label: "Run Detail" },
-      { src: "/images/projects/dq-compass/mapping.png", label: "Supervisory Mapping" },
-      { src: "/images/projects/dq-compass/runs.png", label: "Run History" },
-    ],
-    skills: ["Python", "Pandas", "Flask", "Data Quality", "Data Governance", "Audit & Compliance"],
-    github: "https://github.com/AbdelbassitAb/DQ_compass",
-    highlights: [
-      "Evaluates data across six quality dimensions - completeness, validity, uniqueness, consistency, timeliness, and reconciliation - each a reusable pandas function parameterised by column",
-      "Controls are defined in a plain CSV catalogue with parameters, so adding a new check needs no code",
-      "Produces a severity-weighted composite DQ score, where a high-severity failure counts 5x a low-severity one",
-      "Hash-chained, append-only ledgers make the audit trail tamper-evident, and past runs re-execute from stored snapshots to prove reproducibility",
-      "Sign-off workflow and supervisory mapping link each control to a regulatory requirement and its evidence",
-      "Ships as both a dqcompass CLI and a Flask web app, with 42 tests across schema, connectors, controls, and engine",
-    ],
-  },
-  {
-    slug: "mlops-house-price-prediction",
-    title: "House Price Prediction - MLOps Pipeline on Snowflake",
-    shortDescription:
-      "An end-to-end MLOps pipeline built natively in Snowflake: 22 stages from raw S3 ingestion to a tuned XGBoost model (R2 = 0.9151), registered in the Model Registry and served through a Streamlit app.",
-    fullDescription:
-      "This project runs a full house-price-prediction workflow entirely inside Snowflake, with no export of data to an external environment. The pipeline spans 22 stages across six phases: ingestion of about 1,090 JSON housing records from S3, exploratory analysis with descriptive statistics and correlation matrices, feature preparation (encoding, normalisation, and an 80/20 train/test split), training and comparison of three regressors, hyper-parameter optimisation with GridSearchCV and 3-fold cross-validation, and deployment through the Snowflake Model Registry plus a Streamlit application. XGBoost was selected for production, explaining 91.5% of price variance with the lowest error, and surface area was identified as the strongest single predictor.",
-    thumbnail: "/images/projects/mlops/cover.png",
-    images: [
-      { src: "/images/projects/mlops/cover.png", label: "Overview" },
-      { src: "/images/projects/mlops/model-comparison.png", label: "Model Comparison" },
-      { src: "/images/projects/mlops/pipeline.png", label: "Pipeline" },
-    ],
-    skills: ["Snowflake", "Python", "XGBoost", "Machine Learning", "Snowpark", "scikit-learn", "MLOps"],
-    github: "https://github.com/AbdelbassitAb/PROJET-MLOPS",
-    highlights: [
-      "22-stage pipeline across six phases, executed entirely within Snowflake with no external data export",
-      "Ingested about 1,090 JSON housing records from S3, with zero missing values in the prepared dataset",
-      "Compared Linear Regression, Random Forest, and XGBoost; XGBoost won with MAE 12,757, RMSE 27,517, and R2 0.9151",
-      "Tuned hyper-parameters with GridSearchCV and 3-fold cross-validation, keeping the model with the best generalisation",
-      "Identified surface area as the strongest driver of sale price through correlation analysis",
-      "Registered the final model in the Snowflake Model Registry and exposed predictions through a Streamlit app",
-    ],
-  },
-  {
     slug: "customer-churn-analysis",
     title: "Customer Churn Analysis -- Power BI Dashboard",
     shortDescription:
@@ -155,6 +103,58 @@ export const projects: Project[] = [
       "Converted exploratory analysis into reusable analytics tables designed for dashboards, advanced analysis, and ML",
       "Framed the project around marketing optimization during a 30% budget cut and declining market share",
       "Delivered a data product approach focused on reporting, campaign optimization, and future predictive modeling",
+    ],
+  },
+  {
+    slug: "dq-compass",
+    title: "DQ Compass - Data Quality Control Layer",
+    shortDescription:
+      "A plug-and-play data-quality control layer for spreadsheets and CSV exports: define checks once in a catalogue and get a reproducible quality score plus a tamper-evident audit trail, with no per-file validation code.",
+    fullDescription:
+      "DQ Compass adds a governance layer over End-User Computing (EUC) applications - the spreadsheets and local scripts that sit outside IT control - so teams can work toward standards like BCBS 239 without rebuilding their systems. You point it at a spreadsheet or CSV export, describe the controls once in a CSV catalogue, and the engine produces a severity-weighted quality scorecard plus a hash-chained evidence pack. It is built from four layers: a code-free Control Catalogue, a DQ Engine that runs reusable pandas checks parameterised by column, a Reporting layer with server-rendered scorecards and coverage matrices, and an Audit layer that stores run snapshots for independent re-execution. It ships with both a dqcompass CLI and a Flask web UI, and needs no database or build step.",
+    thumbnail: "/images/projects/dq-compass/home.png",
+    images: [
+      { src: "/images/projects/dq-compass/home.png", label: "Home" },
+      { src: "/images/projects/dq-compass/catalogue.png", label: "Control Catalogue" },
+      { src: "/images/projects/dq-compass/data-sources.png", label: "Data Sources" },
+      { src: "/images/projects/dq-compass/reporting.png", label: "Reporting" },
+      { src: "/images/projects/dq-compass/run-detail.png", label: "Run Detail" },
+      { src: "/images/projects/dq-compass/mapping.png", label: "Supervisory Mapping" },
+      { src: "/images/projects/dq-compass/runs.png", label: "Run History" },
+    ],
+    skills: ["Python", "Pandas", "Flask", "Data Quality", "Data Governance", "Audit & Compliance"],
+    github: "https://github.com/AbdelbassitAb/DQ_compass",
+    highlights: [
+      "Evaluates data across six quality dimensions - completeness, validity, uniqueness, consistency, timeliness, and reconciliation - each a reusable pandas function parameterised by column",
+      "Controls are defined in a plain CSV catalogue with parameters, so adding a new check needs no code",
+      "Produces a severity-weighted composite DQ score, where a high-severity failure counts 5x a low-severity one",
+      "Hash-chained, append-only ledgers make the audit trail tamper-evident, and past runs re-execute from stored snapshots to prove reproducibility",
+      "Sign-off workflow and supervisory mapping link each control to a regulatory requirement and its evidence",
+      "Ships as both a dqcompass CLI and a Flask web app, with 42 tests across schema, connectors, controls, and engine",
+    ],
+  },
+  {
+    slug: "mlops-house-price-prediction",
+    title: "House Price Prediction - MLOps Pipeline on Snowflake",
+    shortDescription:
+      "An end-to-end MLOps pipeline built natively in Snowflake: 22 stages from raw S3 ingestion to a tuned XGBoost model (R2 = 0.9151), registered in the Model Registry and served through a Streamlit app.",
+    fullDescription:
+      "This project runs a full house-price-prediction workflow entirely inside Snowflake, with no export of data to an external environment. The pipeline spans 22 stages across six phases: ingestion of about 1,090 JSON housing records from S3, exploratory analysis with descriptive statistics and correlation matrices, feature preparation (encoding, normalisation, and an 80/20 train/test split), training and comparison of three regressors, hyper-parameter optimisation with GridSearchCV and 3-fold cross-validation, and deployment through the Snowflake Model Registry plus a Streamlit application. XGBoost was selected for production, explaining 91.5% of price variance with the lowest error, and surface area was identified as the strongest single predictor.",
+    thumbnail: "/images/projects/mlops/cover.png",
+    images: [
+      { src: "/images/projects/mlops/cover.png", label: "Overview" },
+      { src: "/images/projects/mlops/model-comparison.png", label: "Model Comparison" },
+      { src: "/images/projects/mlops/pipeline.png", label: "Pipeline" },
+    ],
+    skills: ["Snowflake", "Python", "XGBoost", "Machine Learning", "Snowpark", "scikit-learn", "MLOps"],
+    github: "https://github.com/AbdelbassitAb/PROJET-MLOPS",
+    highlights: [
+      "22-stage pipeline across six phases, executed entirely within Snowflake with no external data export",
+      "Ingested about 1,090 JSON housing records from S3, with zero missing values in the prepared dataset",
+      "Compared Linear Regression, Random Forest, and XGBoost; XGBoost won with MAE 12,757, RMSE 27,517, and R2 0.9151",
+      "Tuned hyper-parameters with GridSearchCV and 3-fold cross-validation, keeping the model with the best generalisation",
+      "Identified surface area as the strongest driver of sale price through correlation analysis",
+      "Registered the final model in the Snowflake Model Registry and exposed predictions through a Streamlit app",
     ],
   },
 ]
