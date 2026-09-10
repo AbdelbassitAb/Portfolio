@@ -12,6 +12,34 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "dq-compass",
+    title: "DQ Compass - Data Quality Control Layer",
+    shortDescription:
+      "A plug-and-play data-quality control layer for spreadsheets and CSV exports: define checks once in a catalogue and get a reproducible quality score plus a tamper-evident audit trail, with no per-file validation code.",
+    fullDescription:
+      "DQ Compass adds a governance layer over End-User Computing (EUC) applications - the spreadsheets and local scripts that sit outside IT control - so teams can work toward standards like BCBS 239 without rebuilding their systems. You point it at a spreadsheet or CSV export, describe the controls once in a CSV catalogue, and the engine produces a severity-weighted quality scorecard plus a hash-chained evidence pack. It is built from four layers: a code-free Control Catalogue, a DQ Engine that runs reusable pandas checks parameterised by column, a Reporting layer with server-rendered scorecards and coverage matrices, and an Audit layer that stores run snapshots for independent re-execution. It ships with both a dqcompass CLI and a Flask web UI, and needs no database or build step.",
+    thumbnail: "/images/projects/dq-compass/home.png",
+    images: [
+      { src: "/images/projects/dq-compass/home.png", label: "Home" },
+      { src: "/images/projects/dq-compass/catalogue.png", label: "Control Catalogue" },
+      { src: "/images/projects/dq-compass/data-sources.png", label: "Data Sources" },
+      { src: "/images/projects/dq-compass/reporting.png", label: "Reporting" },
+      { src: "/images/projects/dq-compass/run-detail.png", label: "Run Detail" },
+      { src: "/images/projects/dq-compass/mapping.png", label: "Supervisory Mapping" },
+      { src: "/images/projects/dq-compass/runs.png", label: "Run History" },
+    ],
+    skills: ["Python", "Pandas", "Flask", "Data Quality", "Data Governance", "Audit & Compliance"],
+    github: "https://github.com/AbdelbassitAb/DQ_compass",
+    highlights: [
+      "Evaluates data across six quality dimensions - completeness, validity, uniqueness, consistency, timeliness, and reconciliation - each a reusable pandas function parameterised by column",
+      "Controls are defined in a plain CSV catalogue with parameters, so adding a new check needs no code",
+      "Produces a severity-weighted composite DQ score, where a high-severity failure counts 5x a low-severity one",
+      "Hash-chained, append-only ledgers make the audit trail tamper-evident, and past runs re-execute from stored snapshots to prove reproducibility",
+      "Sign-off workflow and supervisory mapping link each control to a regulatory requirement and its evidence",
+      "Ships as both a dqcompass CLI and a Flask web app, with 42 tests across schema, connectors, controls, and engine",
+    ],
+  },
+  {
     slug: "customer-churn-analysis",
     title: "Customer Churn Analysis -- Power BI Dashboard",
     shortDescription:
